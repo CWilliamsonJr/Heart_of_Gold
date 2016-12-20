@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bc52d4c3eed34f61a8235389e0391042" Name="Diagram1">
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Donation_Categories" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Donation_Location" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Item" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Login" Width="1.5" PointX="1.5" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Request" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.sysdiagram" Width="1.5" PointX="2.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.User" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_CategoryID_Donation_Categories_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_DonationLocationID_DonationLocation_LocationID" ManuallyRouted="false" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_LocationID_Donation_Location_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_DonationItemID_Items_ItemID" ManuallyRouted="false" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_UserID_Users_User_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_Users_LoginID" ManuallyRouted="false" />
-        <AssociationConnector Association="Hearts_Of_GoldModel.fk_RequesterID_Users_UserID" ManuallyRouted="false" />
+      <Diagram DiagramId="946a514389324dab93f521e669dfc322" Name="Diagram1">
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.Donation_Catagories" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.Donation_Location" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.Item" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.Login" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.Request" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.User" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__Items__CatagoryI__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__Items__LocationI__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__Requests__Locati__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__Items__UserID__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__Requests__Donati__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__UserTable__Login__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="Hearts_of_GoldModel.FK__Requests__Reques__267ABA7A" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

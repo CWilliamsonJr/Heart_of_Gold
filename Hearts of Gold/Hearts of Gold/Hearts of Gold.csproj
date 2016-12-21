@@ -146,6 +146,9 @@
     <Compile Include="Models\Donation_Catagories.cs">
       <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Donation_Categories.cs">
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Donation_Location.cs">
       <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>

@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Hearts_of_GoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Donation_Catagories">
+    <Schema Namespace="Hearts_of_GoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Donation_Categories">
           <Key>
-            <PropertyRef Name="CatagoryID" />
+            <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CatagoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Catagories" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categories" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Donation_Location">
           <Key>
@@ -25,11 +25,12 @@
             <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CatagoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="ItemName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Qauntity" Type="int" Nullable="false" />
+          <Property Name="Item" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -47,7 +48,7 @@
           <Property Name="DonationItemID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="RequesterID" Type="int" Nullable="false" />
-          <Property Name="Qauntity" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -71,43 +72,19 @@
           <Property Name="Streetaddress" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Date_of_Birth" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Items__CatagoryI__20C1E124">
-          <End Role="Donation_Catagories" Type="Self.Donation_Catagories" Multiplicity="1" />
+        <Association Name="fk_CategoryID_Donation_Categories_ID">
+          <End Role="Donation_Categories" Type="Self.Donation_Categories" Multiplicity="1" />
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Donation_Catagories">
-              <PropertyRef Name="CatagoryID" />
+            <Principal Role="Donation_Categories">
+              <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="Items">
-              <PropertyRef Name="CatagoryID" />
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Items__LocationI__1FCDBCEB">
-          <End Role="Donation_Location" Type="Self.Donation_Location" Multiplicity="1" />
-          <End Role="Items" Type="Self.Items" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Donation_Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="Items">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Items__UserID__1ED998B2">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Items" Type="Self.Items" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Items">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Requests__Donati__276EDEB3">
+        <Association Name="fk_DonationItemID_Items_ItemID">
           <End Role="Items" Type="Self.Items" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +96,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Requests__Locati__25869641">
+        <Association Name="fk_DonationLocationID_DonationLocation_LocationID">
           <End Role="Donation_Location" Type="Self.Donation_Location" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +108,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Requests__Reques__267ABA7A">
+        <Association Name="fk_LocationID_Donation_Location_ID">
+          <End Role="Donation_Location" Type="Self.Donation_Location" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donation_Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RequesterID_Users_UserID">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -143,7 +132,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserTable__Login__145C0A3F">
+        <Association Name="fk_UserID_Users_User_ID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_LoginID">
           <End Role="Login" Type="Self.Login" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,44 +188,43 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Hearts_of_GoldModelStoreContainer">
-          <EntitySet Name="Donation_Catagories" EntityType="Self.Donation_Catagories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donation_Categories" EntityType="Self.Donation_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donation_Location" EntityType="Self.Donation_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Items__CatagoryI__20C1E124" Association="Self.FK__Items__CatagoryI__20C1E124">
-            <End Role="Donation_Catagories" EntitySet="Donation_Catagories" />
+          <AssociationSet Name="fk_CategoryID_Donation_Categories_ID" Association="Self.fk_CategoryID_Donation_Categories_ID">
+            <End Role="Donation_Categories" EntitySet="Donation_Categories" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
-          <AssociationSet Name="FK__Items__LocationI__1FCDBCEB" Association="Self.FK__Items__LocationI__1FCDBCEB">
-            <End Role="Donation_Location" EntitySet="Donation_Location" />
-            <End Role="Items" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Items__UserID__1ED998B2" Association="Self.FK__Items__UserID__1ED998B2">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Items" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Requests__Donati__276EDEB3" Association="Self.FK__Requests__Donati__276EDEB3">
+          <AssociationSet Name="fk_DonationItemID_Items_ItemID" Association="Self.fk_DonationItemID_Items_ItemID">
             <End Role="Items" EntitySet="Items" />
             <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
-          <AssociationSet Name="FK__Requests__Locati__25869641" Association="Self.FK__Requests__Locati__25869641">
+          <AssociationSet Name="fk_DonationLocationID_DonationLocation_LocationID" Association="Self.fk_DonationLocationID_DonationLocation_LocationID">
             <End Role="Donation_Location" EntitySet="Donation_Location" />
             <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
-          <AssociationSet Name="FK__Requests__Reques__267ABA7A" Association="Self.FK__Requests__Reques__267ABA7A">
+          <AssociationSet Name="fk_LocationID_Donation_Location_ID" Association="Self.fk_LocationID_Donation_Location_ID">
+            <End Role="Donation_Location" EntitySet="Donation_Location" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RequesterID_Users_UserID" Association="Self.fk_RequesterID_Users_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserTable__Login__145C0A3F" Association="Self.FK__UserTable__Login__145C0A3F">
+          <AssociationSet Name="fk_UserID_Users_User_ID" Association="Self.fk_UserID_Users_User_ID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_LoginID" Association="Self.fk_Users_LoginID">
             <End Role="Login" EntitySet="Login" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Hearts_of_GoldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -255,11 +255,15 @@
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="ItemName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Qauntity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Donation_Catagories" Relationship="Self.FK__Items__CatagoryI__20C1E124" FromRole="Items" ToRole="Donation_Catagories" />
           <NavigationProperty Name="Donation_Location" Relationship="Self.FK__Items__LocationI__1FCDBCEB" FromRole="Items" ToRole="Donation_Location" />
           <NavigationProperty Name="User" Relationship="Self.FK__Items__UserID__1ED998B2" FromRole="Items" ToRole="Users" />
           <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Donati__276EDEB3" FromRole="Items" ToRole="Requests" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Item1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Donation_Categories" Relationship="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID" FromRole="Item" ToRole="Donation_Categories" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -278,7 +282,7 @@
           <Property Name="DonationItemID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="RequesterID" Type="Int32" Nullable="false" />
-          <Property Name="Qauntity" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Donation_Location" Relationship="Self.FK__Requests__Locati__25869641" FromRole="Requests" ToRole="Donation_Location" />
           <NavigationProperty Name="Item" Relationship="Self.FK__Requests__Donati__276EDEB3" FromRole="Requests" ToRole="Items" />
           <NavigationProperty Name="User" Relationship="Self.FK__Requests__Reques__267ABA7A" FromRole="Requests" ToRole="Users" />
@@ -458,6 +462,11 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Donation_Categories" EntityType="Hearts_of_GoldModel.Donation_Categories" />
+          <AssociationSet Name="fk_CategoryID_Donation_Categories_ID" Association="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID">
+            <End Role="Donation_Categories" EntitySet="Donation_Categories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -470,20 +479,32 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Donation_Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categories" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID" FromRole="Donation_Categories" ToRole="Item" />
+        </EntityType>
+        <Association Name="fk_CategoryID_Donation_Categories_ID">
+          <End Type="Hearts_of_GoldModel.Donation_Categories" Role="Donation_Categories" Multiplicity="1" />
+          <End Type="Hearts_of_GoldModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donation_Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Hearts_of_GoldModelStoreContainer" CdmEntityContainer="Hearts_of_GoldEntities">
-          <EntitySetMapping Name="Donation_Catagories">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Catagories">
-              <MappingFragment StoreEntitySet="Donation_Catagories">
-                <ScalarProperty Name="CatagoryID" ColumnName="CatagoryID" />
-                <ScalarProperty Name="Catagories" ColumnName="Catagories" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Donation_Location">
             <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Location">
               <MappingFragment StoreEntitySet="Donation_Location">
@@ -496,13 +517,14 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="Hearts_of_GoldModel.Item">
               <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Item1" ColumnName="Item" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="CatagoryID" ColumnName="CatagoryID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="Qauntity" ColumnName="Qauntity" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logins">
@@ -521,7 +543,6 @@
                 <ScalarProperty Name="DonationItemID" ColumnName="DonationItemID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="RequesterID" ColumnName="RequesterID" />
-                <ScalarProperty Name="Qauntity" ColumnName="Qauntity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -573,6 +594,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Hearts_of_GoldModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Hearts_of_GoldModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Donation_Categories">
+            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Categories">
+              <MappingFragment StoreEntitySet="Donation_Categories">
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

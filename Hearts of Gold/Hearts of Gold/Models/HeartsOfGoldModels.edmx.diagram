@@ -19,6 +19,8 @@
         <AssociationConnector Association="Hearts_of_GoldModel.FK__Requests__Donati__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="Hearts_of_GoldModel.FK__UserTable__Login__145C0A3F" ManuallyRouted="false" />
         <AssociationConnector Association="Hearts_of_GoldModel.FK__Requests__Reques__267ABA7A" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Hearts_of_GoldModel.Donation_Categories" Width="1.5" PointX="5.375" PointY="4.875" />
+        <AssociationConnector Association="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

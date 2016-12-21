@@ -8,7 +8,7 @@ namespace Hearts_of_Gold.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        // GET: Homess
         public ActionResult Index()
         {
             return View();

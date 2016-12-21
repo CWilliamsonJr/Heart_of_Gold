@@ -16,10 +16,10 @@ namespace Hearts_of_Gold.Models
     using System.Data.Objects.DataClasses;
     using System.Linq;
     
-    public partial class Hearts_of_GoldEntities : DbContext
+    public partial class Hearts_of_GoldEntities1 : DbContext
     {
-        public Hearts_of_GoldEntities()
-            : base("name=Hearts_of_GoldEntities")
+        public Hearts_of_GoldEntities1()
+            : base("name=Hearts_of_GoldEntities1")
         {
         }
     
@@ -28,7 +28,7 @@ namespace Hearts_of_Gold.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Donation_Catagories> Donation_Catagories { get; set; }
+        public DbSet<Donation_Categories> Donation_Categories { get; set; }
         public DbSet<Donation_Location> Donation_Location { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Login> Logins { get; set; }

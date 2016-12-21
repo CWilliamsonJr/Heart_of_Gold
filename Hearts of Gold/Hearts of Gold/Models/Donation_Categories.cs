@@ -12,15 +12,15 @@ namespace Hearts_of_Gold.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Donation_Catagories
+    public partial class Donation_Categories
     {
-        public Donation_Catagories()
+        public Donation_Categories()
         {
             this.Items = new HashSet<Item>();
         }
     
-        public int CatagoryID { get; set; }
-        public string Catagories { get; set; }
+        public int CategoryID { get; set; }
+        public string Categories { get; set; }
     
         public virtual ICollection<Item> Items { get; set; }
     }

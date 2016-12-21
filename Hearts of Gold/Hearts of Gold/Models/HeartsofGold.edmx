@@ -5,12 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Hearts_of_GoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Donation_Catagories">
+        <EntityType Name="Donation_Categories">
           <Key>
-            <PropertyRef Name="CatagoryID" />
+            <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CatagoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Catagories" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categories" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Donation_Location">
           <Key>
@@ -25,11 +25,12 @@
             <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CatagoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="ItemName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Qauntity" Type="int" Nullable="false" />
+          <Property Name="Item" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -47,7 +48,7 @@
           <Property Name="DonationItemID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="RequesterID" Type="int" Nullable="false" />
-          <Property Name="Qauntity" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -72,14 +73,14 @@
           <Property Name="Date_of_Birth" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="FK__Items__CatagoryI__20C1E124">
-          <End Role="Donation_Catagories" Type="Self.Donation_Catagories" Multiplicity="1" />
+          <End Role="Donation_Categories" Type="Self.Donation_Categories" Multiplicity="1" />
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Donation_Catagories">
-              <PropertyRef Name="CatagoryID" />
+            <Principal Role="Donation_Categories">
+              <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="Items">
-              <PropertyRef Name="CatagoryID" />
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -187,7 +188,7 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Hearts_of_GoldModelStoreContainer">
-          <EntitySet Name="Donation_Catagories" EntityType="Self.Donation_Catagories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donation_Categories" EntityType="Self.Donation_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donation_Location" EntityType="Self.Donation_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
@@ -195,7 +196,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Items__CatagoryI__20C1E124" Association="Self.FK__Items__CatagoryI__20C1E124">
-            <End Role="Donation_Catagories" EntitySet="Donation_Catagories" />
+            <End Role="Donation_Categories" EntitySet="Donation_Categories" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FK__Items__LocationI__1FCDBCEB" Association="Self.FK__Items__LocationI__1FCDBCEB">
@@ -228,13 +229,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Hearts_of_GoldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Donation_Catagories">
+        <EntityType Name="Donation_Categories">
           <Key>
-            <PropertyRef Name="CatagoryID" />
+            <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CatagoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Catagories" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Items" Relationship="Self.FK__Items__CatagoryI__20C1E124" FromRole="Donation_Catagories" ToRole="Items" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categories" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__CatagoryI__20C1E124" FromRole="Donation_Categories" ToRole="Items" />
         </EntityType>
         <EntityType Name="Donation_Location">
           <Key>
@@ -251,12 +252,13 @@
             <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatagoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ItemName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Qauntity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Donation_Catagories" Relationship="Self.FK__Items__CatagoryI__20C1E124" FromRole="Items" ToRole="Donation_Catagories" />
+          <Property Name="Item1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Donation_Categories" Relationship="Self.FK__Items__CatagoryI__20C1E124" FromRole="Items" ToRole="Donation_Categories" />
           <NavigationProperty Name="Donation_Location" Relationship="Self.FK__Items__LocationI__1FCDBCEB" FromRole="Items" ToRole="Donation_Location" />
           <NavigationProperty Name="User" Relationship="Self.FK__Items__UserID__1ED998B2" FromRole="Items" ToRole="Users" />
           <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Donati__276EDEB3" FromRole="Items" ToRole="Requests" />
@@ -278,7 +280,7 @@
           <Property Name="DonationItemID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="RequesterID" Type="Int32" Nullable="false" />
-          <Property Name="Qauntity" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Donation_Location" Relationship="Self.FK__Requests__Locati__25869641" FromRole="Requests" ToRole="Donation_Location" />
           <NavigationProperty Name="Item" Relationship="Self.FK__Requests__Donati__276EDEB3" FromRole="Requests" ToRole="Items" />
           <NavigationProperty Name="User" Relationship="Self.FK__Requests__Reques__267ABA7A" FromRole="Requests" ToRole="Users" />
@@ -309,14 +311,14 @@
           <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Reques__267ABA7A" FromRole="Users" ToRole="Requests" />
         </EntityType>
         <Association Name="FK__Items__CatagoryI__20C1E124">
-          <End Role="Donation_Catagories" Type="Self.Donation_Catagories" Multiplicity="1" />
+          <End Role="Donation_Categories" Type="Self.Donation_Categories" Multiplicity="1" />
           <End Role="Items" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Donation_Catagories">
-              <PropertyRef Name="CatagoryID" />
+            <Principal Role="Donation_Categories">
+              <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="Items">
-              <PropertyRef Name="CatagoryID" />
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -392,8 +394,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Hearts_of_GoldEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Donation_Catagories" EntityType="Self.Donation_Catagories" />
+        <EntityContainer Name="Hearts_of_GoldEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Donation_Categories" EntityType="Self.Donation_Categories" />
           <EntitySet Name="Donation_Location" EntityType="Self.Donation_Location" />
           <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="Logins" EntityType="Self.Login" />
@@ -401,7 +403,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Items__CatagoryI__20C1E124" Association="Self.FK__Items__CatagoryI__20C1E124">
-            <End Role="Donation_Catagories" EntitySet="Donation_Catagories" />
+            <End Role="Donation_Categories" EntitySet="Donation_Categories" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FK__Items__LocationI__1FCDBCEB" Association="Self.FK__Items__LocationI__1FCDBCEB">
@@ -475,12 +477,12 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Hearts_of_GoldModelStoreContainer" CdmEntityContainer="Hearts_of_GoldEntities">
-          <EntitySetMapping Name="Donation_Catagories">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Catagories">
-              <MappingFragment StoreEntitySet="Donation_Catagories">
-                <ScalarProperty Name="CatagoryID" ColumnName="CatagoryID" />
-                <ScalarProperty Name="Catagories" ColumnName="Catagories" />
+        <EntityContainerMapping StorageEntityContainer="Hearts_of_GoldModelStoreContainer" CdmEntityContainer="Hearts_of_GoldEntities1">
+          <EntitySetMapping Name="Donation_Categories">
+            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Categories">
+              <MappingFragment StoreEntitySet="Donation_Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -497,11 +499,12 @@
             <EntityTypeMapping TypeName="Hearts_of_GoldModel.Item">
               <MappingFragment StoreEntitySet="Items">
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="CatagoryID" ColumnName="CatagoryID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="Qauntity" ColumnName="Qauntity" />
+                <ScalarProperty Name="Item1" ColumnName="Item" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -521,7 +524,7 @@
                 <ScalarProperty Name="DonationItemID" ColumnName="DonationItemID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="RequesterID" ColumnName="RequesterID" />
-                <ScalarProperty Name="Qauntity" ColumnName="Qauntity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

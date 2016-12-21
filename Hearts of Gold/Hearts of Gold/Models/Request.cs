@@ -18,7 +18,7 @@ namespace Hearts_of_Gold.Models
         public int DonationItemID { get; set; }
         public int LocationID { get; set; }
         public int RequesterID { get; set; }
-        public int Qauntity { get; set; }
+        public int Quantity { get; set; }
     
         public virtual Donation_Location Donation_Location { get; set; }
         public virtual Item Item { get; set; }

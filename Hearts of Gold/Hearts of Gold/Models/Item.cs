@@ -20,13 +20,14 @@ namespace Hearts_of_Gold.Models
         }
     
         public int ItemID { get; set; }
-        public int CatagoryID { get; set; }
+        public int CategoryID { get; set; }
         public int LocationID { get; set; }
         public int UserID { get; set; }
-        public string ItemName { get; set; }
-        public int Qauntity { get; set; }
+        public string Item1 { get; set; }
+        public int Quantity { get; set; }
+        public string Description { get; set; }
     
-        public virtual Donation_Catagories Donation_Catagories { get; set; }
+        public virtual Donation_Categories Donation_Categories { get; set; }
         public virtual Donation_Location Donation_Location { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Request> Requests { get; set; }

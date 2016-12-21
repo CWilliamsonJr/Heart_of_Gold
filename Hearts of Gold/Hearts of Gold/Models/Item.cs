@@ -7,24 +7,41 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [Bind(Exclude = "ItemID")]
     public partial class Item
     {
         public Item()
         {
             this.Requests = new HashSet<Request>();
         }
-    
+
+        [ScaffoldColumn(false)]
         public int ItemID { get; set; }
+
+        [Required]
         public int CatagoryID { get; set; }
+
+        [Required]
         public int LocationID { get; set; }
+
+        [ScaffoldColumn(false)]
         public int UserID { get; set; }
+
+        [Required]
+        [DisplayName("Item Name")]
         public string ItemName { get; set; }
-        public int Qauntity { get; set; }
+
+        [Required]
+        [DisplayName("Item Quanity")]
+        public int Quanity { get; set; }
     
         public virtual Donation_Catagories Donation_Catagories { get; set; }
         public virtual Donation_Location Donation_Location { get; set; }

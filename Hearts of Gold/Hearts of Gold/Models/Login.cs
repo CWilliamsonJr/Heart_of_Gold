@@ -16,13 +16,15 @@ namespace Hearts_of_Gold.Models
     {
         public Login()
         {
+            this.Items = new HashSet<Item>();
             this.Users = new HashSet<User>();
         }
     
-        public int ID { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
+        public int id { get; set; }
     
+        public virtual ICollection<Item> Items { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }

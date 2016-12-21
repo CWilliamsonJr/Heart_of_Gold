@@ -16,7 +16,6 @@ namespace Hearts_of_Gold.Models
     {
         public User()
         {
-            this.Items = new HashSet<Item>();
             this.Requests = new HashSet<Request>();
         }
     
@@ -28,7 +27,6 @@ namespace Hearts_of_Gold.Models
         public string Streetaddress { get; set; }
         public System.DateTime Date_of_Birth { get; set; }
     
-        public virtual ICollection<Item> Items { get; set; }
         public virtual Login Login { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
     }

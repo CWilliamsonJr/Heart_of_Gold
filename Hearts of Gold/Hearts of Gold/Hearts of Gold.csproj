@@ -125,15 +125,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Models\HeartsOfGoldModels.Context.tt">
+    <Content Include="Models\HeartOfGoldModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
-      <LastGenOutput>HeartsOfGoldModels.Context.cs</LastGenOutput>
+      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
+      <LastGenOutput>HeartOfGoldModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\HeartsOfGoldModels.tt">
+    <Content Include="Models\HeartOfGoldModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
-      <LastGenOutput>HeartsOfGoldModels.cs</LastGenOutput>
+      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
+      <LastGenOutput>HeartOfGoldModels.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
@@ -143,47 +143,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Donation_Catagories.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+    <Compile Include="Models\Donation_Categories.cs">
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Donation_Location.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeartsOfGoldModels.Context.cs">
+    <Compile Include="Models\HeartOfGoldModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HeartsOfGoldModels.Context.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeartsOfGoldModels.cs">
+    <Compile Include="Models\HeartOfGoldModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeartsOfGoldModels.Designer.cs">
+    <Compile Include="Models\HeartOfGoldModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Login.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Request.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -193,12 +187,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\HeartsOfGoldModels.edmx">
+    <EntityDeploy Include="Models\HeartOfGoldModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HeartsOfGoldModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>HeartOfGoldModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\HeartsOfGoldModels.edmx.diagram">
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
+    <Content Include="Models\HeartOfGoldModels.edmx.diagram">
+      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

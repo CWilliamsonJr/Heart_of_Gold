@@ -35,22 +35,23 @@ namespace Hearts_of_Gold.Models
         [ScaffoldColumn(false)]
         public int UserID { get; set; }
         
-        [Required]
         [DisplayName("Item")]
+        [Required(ErrorMessage = "You must select an item")]
         public string Item1 { get; set; }
         
         [Required]
         [DisplayName("Item Quanity")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must enter a Quanity")]
         public int Quantity { get; set; }
 
         public string Description { get; set; }
-
-        [Required]
+        
         [ScaffoldColumn(true)]
+        [Required(ErrorMessage = "You must select a Donation Category")]
         public virtual Donation_Categories Donation_Categories { get; set; }
-
-        [Required]
+        
         [ScaffoldColumn(true)]
+        [Required(ErrorMessage = "You select a Donation Location")]
         public virtual Donation_Location Donation_Location { get; set; }
 
         [ScaffoldColumn(false)]

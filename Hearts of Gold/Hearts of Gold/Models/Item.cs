@@ -34,17 +34,22 @@ namespace Hearts_of_Gold.Models
 
         [ScaffoldColumn(false)]
         public int UserID { get; set; }
-
+        
+        [Required]
         [DisplayName("Item")]
         public string Item1 { get; set; }
-
+        
+        [Required]
         [DisplayName("Item Quanity")]
         public int Quantity { get; set; }
+
         public string Description { get; set; }
-        
+
+        [Required]
         [ScaffoldColumn(true)]
         public virtual Donation_Categories Donation_Categories { get; set; }
 
+        [Required]
         [ScaffoldColumn(true)]
         public virtual Donation_Location Donation_Location { get; set; }
 

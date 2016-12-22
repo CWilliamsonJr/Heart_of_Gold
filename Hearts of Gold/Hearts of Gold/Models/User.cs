@@ -7,52 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Collections.Generic;
     
-    [Bind(Exclude = "UserID")]
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
             this.Items = new HashSet<Item>();
             this.Requests = new HashSet<Request>();
         }
-
-        [ScaffoldColumn(false)]
+    
         public int UserID { get; set; }
-
-        [ScaffoldColumn(false)]
         public int LoginID { get; set; }
-        
-        [DisplayName("First Name")]
-        [Required(ErrorMessage = "First Name is required")]
         public string Firstname { get; set; }
-        
-        [DisplayName("Last Name")]
-        [Required(ErrorMessage = "Last Name is required")]
         public string Lastname { get; set; }
-        
-        [DisplayName("Email Address")]
-        [Required(ErrorMessage = "Email Address is required")]
         public string Email { get; set; }
-        
-        [DisplayName("Street Address")]
-        [Required(ErrorMessage = "Street Address is required")]
         public string Streetaddress { get; set; }
-        
-        [DisplayName("Date of Birth")]
-        [Required(ErrorMessage = "Date of Birth requried")]
         public System.DateTime Date_of_Birth { get; set; }
-        
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
         public virtual Login Login { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Requests { get; set; }
     }
 }

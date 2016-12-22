@@ -7,57 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Collections.Generic;
     
-    [Bind(Exclude = "ItemID")]
     public partial class Item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
             this.Requests = new HashSet<Request>();
         }
-        [ScaffoldColumn(false)]
+    
         public int ItemID { get; set; }
-
-        [ScaffoldColumn(false)]
         public int CategoryID { get; set; }
-
-        [ScaffoldColumn(false)]
         public int LocationID { get; set; }
-
-        [ScaffoldColumn(false)]
         public int UserID { get; set; }
-        
-        [DisplayName("Item")]
-        [Required(ErrorMessage = "You must select an item")]
         public string Item1 { get; set; }
-        
-        [Required]
-        [DisplayName("Item Quanity")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must enter a Quanity")]
         public int Quantity { get; set; }
-
         public string Description { get; set; }
-        
-        [ScaffoldColumn(true)]
-        [Required(ErrorMessage = "You must select a Donation Category")]
+    
         public virtual Donation_Categories Donation_Categories { get; set; }
-        
-        [ScaffoldColumn(true)]
-        [Required(ErrorMessage = "You select a Donation Location")]
         public virtual Donation_Location Donation_Location { get; set; }
-
-        [ScaffoldColumn(false)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Requests { get; set; }
-
-        [ScaffoldColumn(false)]
         public virtual User User { get; set; }
     }
 }

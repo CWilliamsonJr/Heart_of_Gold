@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Hearts_of_GoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Hearts_Of_GoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Donation_Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -156,7 +156,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Hearts_of_GoldModelStoreContainer">
+        <EntityContainer Name="Hearts_Of_GoldModelStoreContainer">
           <EntitySet Name="Donation_Categories" EntityType="Self.Donation_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donation_Location" EntityType="Self.Donation_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
@@ -197,7 +197,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Hearts_of_GoldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Hearts_Of_GoldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Donation_Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -363,7 +363,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Hearts_Of_GoldEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Donation_Categories" EntityType="Self.Donation_Categories" />
           <EntitySet Name="Donation_Location" EntityType="Self.Donation_Location" />
           <EntitySet Name="Items" EntityType="Self.Item" />
@@ -405,9 +405,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Hearts_of_GoldModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Hearts_Of_GoldModelStoreContainer" CdmEntityContainer="Hearts_Of_GoldEntities">
           <EntitySetMapping Name="Donation_Categories">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Categories">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.Donation_Categories">
               <MappingFragment StoreEntitySet="Donation_Categories">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Categories" ColumnName="Categories" />
@@ -415,7 +415,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Donation_Location">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Location">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.Donation_Location">
               <MappingFragment StoreEntitySet="Donation_Location">
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
@@ -424,7 +424,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Item">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.Item">
               <MappingFragment StoreEntitySet="Items">
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -437,7 +437,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logins">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Login">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.Login">
               <MappingFragment StoreEntitySet="Login">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -446,7 +446,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Requests">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Request">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.Request">
               <MappingFragment StoreEntitySet="Requests">
                 <ScalarProperty Name="RequestID" ColumnName="RequestID" />
                 <ScalarProperty Name="DonationItemID" ColumnName="DonationItemID" />
@@ -457,7 +457,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.sysdiagram">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -468,7 +468,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.User">
+            <EntityTypeMapping TypeName="Hearts_Of_GoldModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />

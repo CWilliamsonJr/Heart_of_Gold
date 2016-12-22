@@ -13,10 +13,10 @@ namespace Hearts_of_Gold.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Hearts_Of_GoldEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Hearts_Of_GoldEntities()
+            : base("name=Hearts_Of_GoldEntities")
         {
         }
     

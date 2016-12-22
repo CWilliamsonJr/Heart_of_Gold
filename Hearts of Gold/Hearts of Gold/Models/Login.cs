@@ -7,22 +7,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+using System.Web.Mvc;
+
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Collections.Generic;
     
+    [Bind(Exclude = "ID")]
     public partial class Login
     {
         public Login()
         {
             this.Users = new HashSet<User>();
         }
-    
+
+        [ScaffoldColumn(false)]
         public int ID { get; set; }
+
+        [Required(ErrorMessage = "User Name is required")]
+        [DisplayName("User Name")]
         public string Username { get; set; }
+
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password is required")]
+        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         public string Password { get; set; }
-    
+
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password is required")]
+        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
+        [System.ComponentModel.DataAnnotations.Compare("Password")]
+        public string ConfirmPassword { get; set; }
+
         public virtual ICollection<User> Users { get; set; }
     }
 }

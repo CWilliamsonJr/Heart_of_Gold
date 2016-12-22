@@ -31,10 +31,14 @@ namespace Hearts_of_Gold.Models
         [ScaffoldColumn(false)]
         public int RequesterID { get; set; }
 
+        [Required]
+        [DisplayName("Item Quanity")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must enter a Quanity")]
         public int Quantity { get; set; }
         
         [ScaffoldColumn(true)]
         [DisplayName("Donation Location")]
+        [Required(ErrorMessage = "You must select a Donation Location")]
         public virtual Donation_Location Donation_Location { get; set; }
         public virtual Item Item { get; set; }
 

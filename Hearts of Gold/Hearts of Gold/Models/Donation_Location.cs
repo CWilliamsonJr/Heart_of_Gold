@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace Hearts_of_Gold.Models
 {
     using System;
@@ -22,6 +25,8 @@ namespace Hearts_of_Gold.Models
         }
     
         public int LocationID { get; set; }
+
+        [DisplayName("Business Name")]
         public string BusinessName { get; set; }
         public string Address { get; set; }
     

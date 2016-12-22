@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Hearts_of_Gold.Models
 {
     using System;
@@ -19,7 +21,7 @@ namespace Hearts_of_Gold.Models
         {
             this.Items = new HashSet<Item>();
         }
-    
+        [DisplayName("Category")]
         public int CategoryID { get; set; }
         public string Categories { get; set; }
     

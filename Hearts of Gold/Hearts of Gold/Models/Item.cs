@@ -25,14 +25,15 @@ namespace Hearts_of_Gold.Models
         }
         [ScaffoldColumn(false)]
         public int ItemID { get; set; }
-
-        [ScaffoldColumn(false)]
+        
+        [DisplayName("Category")]
         public int CategoryID { get; set; }
-
-        [ScaffoldColumn(false)]
+        
+        [DisplayName("Location")]
         public int LocationID { get; set; }
 
-        [ScaffoldColumn(false)]
+        
+        [HiddenInput(DisplayValue = false)]
         public int UserID { get; set; }
 
         [DisplayName("Item")]

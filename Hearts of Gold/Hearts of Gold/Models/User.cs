@@ -30,25 +30,25 @@ namespace Hearts_of_Gold.Models
 
         [ScaffoldColumn(false)]
         public int LoginID { get; set; }
-
-        [Required]
+        
         [DisplayName("First Name")]
+        [Required(ErrorMessage = "First Name is required")]
         public string Firstname { get; set; }
-
-        [Required]
+        
         [DisplayName("Last Name")]
+        [Required(ErrorMessage = "Last Name is required")]
         public string Lastname { get; set; }
-
-        [Required]
+        
         [DisplayName("Email Address")]
+        [Required(ErrorMessage = "Email Address is required")]
         public string Email { get; set; }
-
-        [Required]
+        
         [DisplayName("Street Address")]
+        [Required(ErrorMessage = "Street Address is required")]
         public string Streetaddress { get; set; }
-
-        [Required]
+        
         [DisplayName("Date of Birth")]
+        [Required(ErrorMessage = "Date of Birth requried")]
         public System.DateTime Date_of_Birth { get; set; }
         
         public virtual ICollection<Item> Items { get; set; }

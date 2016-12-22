@@ -54,8 +54,6 @@ public partial class Item
 
     public virtual ICollection<Request> Requests { get; set; }
 
-    public virtual Donation_Categories Donation_Categories { get; set; }
-
 }
 
 }

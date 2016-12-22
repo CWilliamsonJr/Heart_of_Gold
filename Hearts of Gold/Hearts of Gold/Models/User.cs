@@ -9,47 +9,55 @@
 //------------------------------------------------------------------------------
 
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Hearts_of_Gold.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class User
-{
 
-    public User()
+    [Bind(Exclude = "UserID")]
+    public partial class User
     {
+        public User()
+        {
+            this.Items = new HashSet<Item>();
+            this.Requests = new HashSet<Request>();
+        }
+        [ScaffoldColumn(false)]
+        public int UserID { get; set; }
 
-        this.Items = new HashSet<Item>();
+        [ScaffoldColumn(false)]
+        public int LoginID { get; set; }
 
-        this.Requests = new HashSet<Request>();
+        [Required]
+        [DisplayName("First Name")]
+        public string Firstname { get; set; }
+
+        [Required]
+        [DisplayName("Last Name")]
+        public string Lastname { get; set; }
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        [DisplayName("Street Address")]
+        public string Streetaddress { get; set; }
+
+        [Required]
+        [DisplayName("Birth Date")]
+        public System.DateTime Date_of_Birth { get; set; }
+
+
+        public virtual ICollection<Item> Items { get; set; }
+
+        public virtual Login Login { get; set; }
+
+        public virtual ICollection<Request> Requests { get; set; }
 
     }
-
-
-    public int UserID { get; set; }
-
-    public int LoginID { get; set; }
-
-    public string Firstname { get; set; }
-
-    public string Lastname { get; set; }
-
-    public string Email { get; set; }
-
-    public string Streetaddress { get; set; }
-
-    public System.DateTime Date_of_Birth { get; set; }
-
-
-
-    public virtual ICollection<Item> Items { get; set; }
-
-    public virtual Login Login { get; set; }
-
-    public virtual ICollection<Request> Requests { get; set; }
-
-}
 
 }

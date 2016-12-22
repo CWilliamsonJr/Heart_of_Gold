@@ -5,13 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Hearts_of_GoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Donation_Categories">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Categories" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
         <EntityType Name="Donation_Location">
           <Key>
             <PropertyRef Name="LocationID" />
@@ -72,18 +65,6 @@
           <Property Name="Streetaddress" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Date_of_Birth" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="fk_CategoryID_Donation_Categories_ID">
-          <End Role="Donation_Categories" Type="Self.Donation_Categories" Multiplicity="1" />
-          <End Role="Items" Type="Self.Items" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Donation_Categories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="Items">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_DonationItemID_Items_ItemID">
           <End Role="Items" Type="Self.Items" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
@@ -188,17 +169,12 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Hearts_of_GoldModelStoreContainer">
-          <EntitySet Name="Donation_Categories" EntityType="Self.Donation_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donation_Location" EntityType="Self.Donation_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_CategoryID_Donation_Categories_ID" Association="Self.fk_CategoryID_Donation_Categories_ID">
-            <End Role="Donation_Categories" EntitySet="Donation_Categories" />
-            <End Role="Items" EntitySet="Items" />
-          </AssociationSet>
           <AssociationSet Name="fk_DonationItemID_Items_ItemID" Association="Self.fk_DonationItemID_Items_ItemID">
             <End Role="Items" EntitySet="Items" />
             <End Role="Requests" EntitySet="Requests" />
@@ -263,7 +239,6 @@
           <Property Name="Item1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Donation_Categories" Relationship="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID" FromRole="Item" ToRole="Donation_Categories" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -462,11 +437,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="Donation_Categories" EntityType="Hearts_of_GoldModel.Donation_Categories" />
-          <AssociationSet Name="fk_CategoryID_Donation_Categories_ID" Association="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID">
-            <End Role="Donation_Categories" EntitySet="Donation_Categories" />
-            <End Role="Item" EntitySet="Items" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -479,26 +449,6 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Donation_Categories">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Categories" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Items" Relationship="Hearts_of_GoldModel.fk_CategoryID_Donation_Categories_ID" FromRole="Donation_Categories" ToRole="Item" />
-        </EntityType>
-        <Association Name="fk_CategoryID_Donation_Categories_ID">
-          <End Type="Hearts_of_GoldModel.Donation_Categories" Role="Donation_Categories" Multiplicity="1" />
-          <End Type="Hearts_of_GoldModel.Item" Role="Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Donation_Categories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="Item">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -594,14 +544,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Hearts_of_GoldModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Hearts_of_GoldModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="Donation_Categories">
-            <EntityTypeMapping TypeName="Hearts_of_GoldModel.Donation_Categories">
-              <MappingFragment StoreEntitySet="Donation_Categories">
-                <ScalarProperty Name="Categories" ColumnName="Categories" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

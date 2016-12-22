@@ -9,40 +9,45 @@
 //------------------------------------------------------------------------------
 
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Hearts_of_Gold.Models
 {
 
 using System;
     using System.Collections.Generic;
-    
-public partial class Item
-{
 
-    public Item()
+    [Bind(Exclude = "ItemID")]
+    public partial class Item
     {
+        public Item()
+        {
+            this.Requests = new HashSet<Request>();
+        }
 
-        this.Requests = new HashSet<Request>();
+        [ScaffoldColumn(false)]
+        public int ItemID { get; set; }
 
-    }
+        [Required]
+        public int CatagoryID { get; set; }
 
+        [Required]
+        public int LocationID { get; set; }
 
-    public int ItemID { get; set; }
+        [ScaffoldColumn(false)]
+        public int UserID { get; set; }
 
-    public int CatagoryID { get; set; }
+        [Required]
+        [DisplayName("Item Name")]
+        public string Item1 { get; set; }
 
-    public int LocationID { get; set; }
+        [Required]
+        [DisplayName("Item Quanity")]
+        public int Quanity { get; set; }
 
-    public int UserID { get; set; }
-
-    public string ItemName { get; set; }
-
-    public int CategoryID { get; set; }
-
-    public string Item1 { get; set; }
-
-    public int Quantity { get; set; }
-
-    public string Description { get; set; }
+        public string Description { get; set; }
 
 
 

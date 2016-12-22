@@ -9,28 +9,39 @@
 //------------------------------------------------------------------------------
 
 
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Hearts_of_Gold.Models
 {
 
 using System;
     using System.Collections.Generic;
-    
-public partial class Request
-{
 
-    public int RequestID { get; set; }
+    [Bind(Exclude = "RequestID")]
+    public partial class Request
+    {
+        [ScaffoldColumn(false)]
+        public int RequestID { get; set; }
 
-    public int DonationItemID { get; set; }
+        [ScaffoldColumn(false)]
+        public int DonationItemID { get; set; }
 
-    public int LocationID { get; set; }
+        [ScaffoldColumn(false)]
+        public int LocationID { get; set; }
 
-    public int RequesterID { get; set; }
+        [ScaffoldColumn(false)]
+        public int RequesterID { get; set; }
 
-    public int Quantity { get; set; }
+        [Required]
+        [Range(0, 1000, ErrorMessage = "Quantity must be between 0 and 1000")]
+        public int Qauntity { get; set; }
+
+       
 
 
 
-    public virtual Donation_Location Donation_Location { get; set; }
+        public virtual Donation_Location Donation_Location { get; set; }
 
     public virtual Item Item { get; set; }
 

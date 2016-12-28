@@ -55,10 +55,10 @@ namespace Hearts_of_Gold.Models
         [Required(ErrorMessage = "You select a Donation Location")]
         public virtual Donation_Location Donation_Location { get; set; }
 
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public virtual ICollection<Request> Requests { get; set; }
 
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public virtual User User { get; set; }
     }
 }

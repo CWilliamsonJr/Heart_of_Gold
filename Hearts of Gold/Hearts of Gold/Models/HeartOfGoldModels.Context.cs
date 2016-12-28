@@ -7,13 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Hearts_Of_GoldEntities : DbContext
+    public partial class Hearts_Of_GoldEntities : IdentityDbContext
     {
         public Hearts_Of_GoldEntities()
             : base("name=Hearts_Of_GoldEntities")

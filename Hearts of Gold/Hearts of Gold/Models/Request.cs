@@ -22,13 +22,13 @@ namespace Hearts_of_Gold.Models
         [ScaffoldColumn(false)]
         public int RequestID { get; set; }
 
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public int DonationItemID { get; set; }
 
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public int LocationID { get; set; }
 
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public int RequesterID { get; set; }
 
         [Required]
@@ -42,7 +42,7 @@ namespace Hearts_of_Gold.Models
         public virtual Donation_Location Donation_Location { get; set; }
         public virtual Item Item { get; set; }
 
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public virtual User User { get; set; }
     }
 }

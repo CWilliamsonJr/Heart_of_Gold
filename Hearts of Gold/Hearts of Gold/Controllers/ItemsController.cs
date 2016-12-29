@@ -7,18 +7,31 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hearts_of_Gold.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
     public class ItemsController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
+        
 
         // GET: Items
         public ActionResult Index()
         {
             var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User);
             return View(items.ToList());
+        }
+
+        public ActionResult MyItems()
+        {
+            var userId = HttpContext.User.Identity.GetUserId();
+            var items =
+                db.Items.Include(i => i.Donation_Categories)
+                    .Include(i => i.Donation_Location)
+                    .Include(i => i.User)
+                    .Where(i => i.User.AspNetUser.Id == userId);
+            return View("Index",items.ToList());
         }
 
         // GET: Items/Details/5

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hearts_of_Gold.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
@@ -35,10 +36,11 @@ namespace Hearts_of_Gold.Controllers
             }
             return View(user);
         }
-
+        
         // GET: Users/Create
         public ActionResult Create()
         {
+            //var userName = HttpContext.User.Identity.Name;
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }

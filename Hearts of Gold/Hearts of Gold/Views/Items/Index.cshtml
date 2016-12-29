@@ -53,9 +53,17 @@
             @Html.DisplayFor(modelItem => item.User.AspNetUsersId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })
+            @Html.ActionLink("Details", "Details", new { id = item.ItemID }) 
+
+            @if (item.User.AspNetUsersId == ViewBag.userID)
+            {
+                <text>|</text>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
+                <text>|</text>
+                @Html.ActionLink("Delete", "Delete", new {id = item.ItemID})
+                
+            }
+
         </td>
     </tr>
 }

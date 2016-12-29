@@ -19,6 +19,7 @@ namespace Hearts_of_Gold.Controllers
         // GET: Items
         public ActionResult Index()
         {
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
             var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User);
             return View(items.ToList());
         }

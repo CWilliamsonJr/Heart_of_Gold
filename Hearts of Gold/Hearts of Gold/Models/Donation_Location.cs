@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+    [MetadataType(typeof(LocationMetadata))]
     public partial class Donation_Location
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Donation_Location()
         {
             this.Requests = new HashSet<Request>();
@@ -25,14 +25,12 @@ namespace Hearts_of_Gold.Models
         }
     
         public int LocationID { get; set; }
-
-        [DisplayName("Business Name")]
         public string BusinessName { get; set; }
         public string Address { get; set; }
     
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Requests { get; set; }
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
     }
 }

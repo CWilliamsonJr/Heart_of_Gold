@@ -7,15 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Microsoft.AspNet.Identity.EntityFramework;
-
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Hearts_Of_GoldEntities : IdentityDbContext
+    public partial class Hearts_Of_GoldEntities : DbContext
     {
         public Hearts_Of_GoldEntities()
             : base("name=Hearts_Of_GoldEntities")
@@ -27,12 +25,11 @@ namespace Hearts_of_Gold.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Donation_Categories> Donation_Categories { get; set; }
         public virtual DbSet<Donation_Location> Donation_Location { get; set; }
         public virtual DbSet<Item> Items { get; set; }
-        public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

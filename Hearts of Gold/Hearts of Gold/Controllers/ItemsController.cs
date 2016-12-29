@@ -41,14 +41,16 @@ namespace Hearts_of_Gold.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories");
             ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Firstname");
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "AspNetUsersId");
             return View();
         }
 
         // POST: Items/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Item item)
+        public ActionResult Create([Bind(Include = "ItemID,CategoryID,LocationID,UserID,Item1,Quantity,Description")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +61,7 @@ namespace Hearts_of_Gold.Controllers
 
             ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories", item.CategoryID);
             ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", item.LocationID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Firstname", item.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "AspNetUsersId", item.UserID);
             return View(item);
         }
 
@@ -77,14 +79,16 @@ namespace Hearts_of_Gold.Controllers
             }
             ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories", item.CategoryID);
             ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", item.LocationID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Firstname", item.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "AspNetUsersId", item.UserID);
             return View(item);
         }
 
         // POST: Items/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Item item)
+        public ActionResult Edit([Bind(Include = "ItemID,CategoryID,LocationID,UserID,Item1,Quantity,Description")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +98,7 @@ namespace Hearts_of_Gold.Controllers
             }
             ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories", item.CategoryID);
             ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", item.LocationID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Firstname", item.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "AspNetUsersId", item.UserID);
             return View(item);
         }
 

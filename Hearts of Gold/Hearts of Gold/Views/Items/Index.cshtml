@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Donation_Location.BusinessName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Firstname)
+            @Html.DisplayNameFor(model => model.User.AspNetUsersId)
         </th>
         <th></th>
     </tr>
@@ -50,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.Donation_Location.BusinessName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.Firstname)
+            @Html.DisplayFor(modelItem => item.User.AspNetUsersId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |

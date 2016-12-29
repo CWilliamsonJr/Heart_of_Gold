@@ -187,16 +187,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\HeartOfGoldModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
-      <LastGenOutput>HeartOfGoldModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\HeartOfGoldModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
-      <LastGenOutput>HeartOfGoldModels.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -205,7 +195,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\HeartsOfGoldModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HeartsOfGoldModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\HeartsOfGoldModels.edmx.diagram">
+      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Models\HeartsOfGoldModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
+      <LastGenOutput>HeartsOfGoldModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\HeartsOfGoldModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
+      <LastGenOutput>HeartsOfGoldModels.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -232,47 +239,46 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Donation_Categories.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Donation_Location.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeartOfGoldModels.Context.cs">
+    <Compile Include="Models\HeartsOfGoldModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HeartOfGoldModels.Context.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeartOfGoldModels.cs">
+    <Compile Include="Models\HeartsOfGoldModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HeartOfGoldModels.Designer.cs">
+    <Compile Include="Models\HeartsOfGoldModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Item.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Login.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\Request.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>HeartOfGoldModels.tt</DependentUpon>
+      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -283,20 +289,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\HeartOfGoldModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HeartOfGoldModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\HeartOfGoldModels.edmx.diagram">
-      <DependentUpon>HeartOfGoldModels.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Items\Create.cshtml" />
-    <Content Include="Views\Items\Delete.cshtml" />
-    <Content Include="Views\Items\Details.cshtml" />
-    <Content Include="Views\Items\Edit.cshtml" />
-    <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\About.cshtml" />
@@ -323,6 +317,16 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Delete.cshtml" />
+    <Content Include="Views\Items\Details.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

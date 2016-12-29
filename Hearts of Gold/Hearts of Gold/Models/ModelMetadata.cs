@@ -41,13 +41,21 @@ namespace Hearts_of_Gold.Models
         public string AspNetUsersId { get; set; }
 
         [DisplayName("First Name")]
+        [Required(ErrorMessage = "You must enter a First Name")]
         public string Firstname { get; set; }
+
+        [DisplayName("Last Name")]
+        [Required(ErrorMessage = "You must enter a Last Name")]
         public string Lastname { get; set; }
+
+        [DisplayName("Street Address")]
+        [Required(ErrorMessage = "You must enter a Street Address")]
         public string Streetaddress { get; set; }
 
         [DisplayName("Date of Birth")]
         public System.DateTime Date_of_Birth { get; set; }
-
+        
+        [DisplayName(" ")]
         [HiddenInput(DisplayValue = false)]
         public Nullable<bool> IsDeleted { get; set; }
     }

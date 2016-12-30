@@ -16,7 +16,7 @@ namespace Hearts_of_Gold.Controllers
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
 
-        
+
         // GET: Items
         public ActionResult Index()
         {

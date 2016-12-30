@@ -53,7 +53,7 @@ namespace Hearts_of_Gold.Models
     {
         public int UserID { get; set; }
 
-        [ScaffoldColumn(false)]
+        
         public string AspNetUsersId { get; set; }
 
         [DisplayName("First Name")]

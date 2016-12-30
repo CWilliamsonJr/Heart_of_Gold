@@ -15,6 +15,15 @@ namespace Hearts_of_Gold.Controllers
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
 
+        private int ReturnUserId() // Gets the user id from the users table and returns it.
+        {
+            var aspNetUserId = HttpContext.User.Identity.GetUserId();
+            return 
+                db.Users
+                .Where(i => i.AspNetUsersId == aspNetUserId)
+                .Select(i => i.UserID).FirstOrDefault();
+        }
+
         // GET: Users
         public ActionResult Index()
         {
@@ -23,25 +32,27 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            var id = ReturnUserId();
+
+            //if (id == 0)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Create");
             }
             return View(user);
         }
-        
+
         // GET: Users/Create
         public ActionResult Create()
         {
             //var userName = HttpContext.User.Identity.Name;
-            ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
+            //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -50,10 +61,11 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,AspNetUsersId,Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
+        public ActionResult Create([Bind(Include = "Firstname,Lastname,Streetaddress,Date_of_Birth")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.AspNetUsersId = HttpContext.User.Identity.GetUserId();
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -64,11 +76,12 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            var id = ReturnUserId();
+            if (id == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             User user = db.Users.Find(id);
             if (user == null)
@@ -84,7 +97,7 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,AspNetUsersId,Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
+        public ActionResult Edit([Bind(Include = "Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -97,11 +110,12 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete()
         {
-            if (id == null)
+            var id = ReturnUserId();
+            if (id == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             User user = db.Users.Find(id);
             if (user == null)
@@ -114,8 +128,9 @@ namespace Hearts_of_Gold.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed()
         {
+            var id = ReturnUserId();
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();

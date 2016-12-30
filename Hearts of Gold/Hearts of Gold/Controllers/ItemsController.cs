@@ -55,7 +55,7 @@ namespace Hearts_of_Gold.Controllers
         // GET: Items
         public ActionResult Index()
         {
-            ViewBag.userID = HttpContext.User.Identity.GetUserId(); // used to map the user to their item for edit and delete purposes
+            ViewBag.userID = HttpContext.User.Identity.GetUserId(); // used to map the user to their ite 
             var items = ReturnItems<ItemViewModels>();
             return View(items);
         }
@@ -98,10 +98,19 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,CategoryID,LocationID,UserID,Item1,Quantity,Description")] Item item)
+        public ActionResult Create([Bind(Include = "CategoryID,LocationID,Item1,Quantity,Description")] Item item)
         {
             if (ModelState.IsValid)
             {
+                var userId = HttpContext.User.Identity.GetUserId();
+                var query =
+                    db.Items
+                        .Where(i => i.User.AspNetUsersId == userId)
+                        .Select(i => i.UserID)
+                        .First();
+
+                item.UserID = query;
+
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");

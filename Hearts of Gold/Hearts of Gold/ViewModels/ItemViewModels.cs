@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel;
+using System.Web.Mvc;
 using Hearts_of_Gold.Models;
 
 namespace Hearts_of_Gold.ViewModels
 {
+    
     public class ItemViewModels
     {
         public int ItemID { get; set; }
-        //public int CategoryID { get; set; }
-        //public int LocationID { get; set; }
+        public int CategoryID { get; set; }
+        public int LocationID { get; set; }
         //private int UserID { get; set; }
         public string AspNetUsersId { get; set; }
         public string Item { get; set; }
@@ -25,8 +27,8 @@ namespace Hearts_of_Gold.ViewModels
             return new ItemViewModels
             {
                 ItemID = item.ItemID,
-                //CategoryID = item.CategoryID,
-                //LocationID = item.LocationID,
+                CategoryID = item.CategoryID,
+                LocationID = item.LocationID,
                 //UserID = item.UserID,
                 Item = item.Item1,
                 Quantity = item.Quantity,
@@ -42,8 +44,8 @@ namespace Hearts_of_Gold.ViewModels
             return new Item
             {
                 ItemID = vm.ItemID,
-                //CategoryID = vm.CategoryID,
-                //LocationID = vm.LocationID,
+                CategoryID = vm.CategoryID,
+                LocationID = vm.LocationID,
                 //UserID = vm.UserID,
                 Item1 = vm.Item,
                 Quantity = vm.Quantity,

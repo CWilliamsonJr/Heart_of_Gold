@@ -14,18 +14,18 @@ namespace Hearts_of_Gold.Models
     //[ScaffoldTable(true)]
     public class ItemMetadata
     {
-        [ScaffoldColumn(false)]
-        public int ItemID { get; set; }
-
         [DisplayName("Category")]
         public int CategoryID { get; set; }
 
         [DisplayName("Location")]
         public int LocationID { get; set; }
-        public int UserID { get; set; }
 
         [DisplayName("Item")]
+        [Required(ErrorMessage = "Must provide item name")]
         public string Item1 { get; set; }
+
+
+        [Range(1,int.MaxValue, ErrorMessage = "Must enter a value greater than 0")]
         public int Quantity { get; set; }
         public string Description { get; set; }
     }
@@ -34,6 +34,18 @@ namespace Hearts_of_Gold.Models
     {
         [DisplayName("Business Name")]
         public string BusinessName { get; set; }
+
+        [DisplayName("Location")]
+        public int LocationID { get; set; }
+    }
+
+    public class CategoryMetadata
+    {
+        [DisplayName("Category")]
+        public int CategoryID { get; set; }
+
+        [DisplayName("Item Category")]
+        public string Categories { get; set; }
     }
 
     [ScaffoldTable(true)]
@@ -57,6 +69,7 @@ namespace Hearts_of_Gold.Models
         public string Streetaddress { get; set; }
 
         [DisplayName("Date of Birth")]
+        [Required(ErrorMessage = "You must enter a Date of Birth")]
         public System.DateTime Date_of_Birth { get; set; }
         
         [DisplayName(" ")]

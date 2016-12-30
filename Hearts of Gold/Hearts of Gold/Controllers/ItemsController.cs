@@ -16,55 +16,24 @@ namespace Hearts_of_Gold.Controllers
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
 
-        public IList<T> ReturnItems<T>()
-        {
-            var items = db.Items.Include(i => i.Donation_Categories)
-                        .Include(i => i.Donation_Location)
-                        .Include(i => i.User)
-                        .Select(i => new ItemViewModels()
-                        {
-                            Item = i.Item1,
-                            Quantity = i.Quantity,
-                            Donation_Categories = i.Donation_Categories,
-                            Donation_Location = i.Donation_Location,
-                            AspNetUsersId = i.User.AspNetUsersId,
-                            ItemID = i.ItemID,
-                            Description = i.Description
-                        }).ToList();
-            return (IList<T>) items;
-        }
-
-        public IList<T> ReturnItems<T>(string userId)
-        {
-            var items = db.Items.Include(i => i.Donation_Categories)
-                        .Include(i => i.Donation_Location)
-                        .Include(i => i.User).Where(i => i.User.AspNetUsersId == userId )
-                        .Select(i => new ItemViewModels()
-                        {
-                            Item = i.Item1,
-                            Quantity = i.Quantity,
-                            Donation_Categories = i.Donation_Categories,
-                            Donation_Location = i.Donation_Location,
-                            AspNetUsersId = i.User.AspNetUsersId,
-                            ItemID = i.ItemID,
-                            Description = i.Description
-                        }).ToList();
-            return (IList<T>)items;
-        }
-
+        
         // GET: Items
         public ActionResult Index()
         {
-            ViewBag.userID = HttpContext.User.Identity.GetUserId(); // used to map the user to their ite 
-            var items = ReturnItems<ItemViewModels>();
-            return View(items);
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
+            var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User);
+            return View(items.ToList());
         }
 
         public ActionResult MyItems()
         {
-            ViewBag.userID = HttpContext.User.Identity.GetUserId();
-            var items = ReturnItems<ItemViewModels>(ViewBag.userID);
-            return View("Index",items);
+            var userId = HttpContext.User.Identity.GetUserId();
+            var items =
+                db.Items.Include(i => i.Donation_Categories)
+                    .Include(i => i.Donation_Location)
+                    .Include(i => i.User)
+                    .Where(i => i.User.AspNetUser.Id == userId);
+            return View("Index", items.ToList());
         }
 
         // GET: Items/Details/5

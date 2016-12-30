@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hearts_of_Gold.Models;
+using Hearts_of_Gold.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
@@ -14,30 +15,63 @@ namespace Hearts_of_Gold.Controllers
     public class ItemsController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
-        
+
+        public IList<T> ReturnItems<T>()
+        {
+            var items = db.Items.Include(i => i.Donation_Categories)
+                        .Include(i => i.Donation_Location)
+                        .Include(i => i.User)
+                        .Select(i => new ItemViewModels()
+                        {
+                            Item = i.Item1,
+                            Quantity = i.Quantity,
+                            Donation_Categories = i.Donation_Categories,
+                            Donation_Location = i.Donation_Location,
+                            AspNetUsersId = i.User.AspNetUsersId,
+                            ItemID = i.ItemID,
+                            Description = i.Description
+                        }).ToList();
+            return (IList<T>) items;
+        }
+
+        public IList<T> ReturnItems<T>(string userId)
+        {
+            var items = db.Items.Include(i => i.Donation_Categories)
+                        .Include(i => i.Donation_Location)
+                        .Include(i => i.User).Where(i => i.User.AspNetUsersId == userId )
+                        .Select(i => new ItemViewModels()
+                        {
+                            Item = i.Item1,
+                            Quantity = i.Quantity,
+                            Donation_Categories = i.Donation_Categories,
+                            Donation_Location = i.Donation_Location,
+                            AspNetUsersId = i.User.AspNetUsersId,
+                            ItemID = i.ItemID,
+                            Description = i.Description
+                        }).ToList();
+            return (IList<T>)items;
+        }
 
         // GET: Items
         public ActionResult Index()
         {
-            ViewBag.userID = HttpContext.User.Identity.GetUserId();
-            var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User);
-            return View(items.ToList());
+            ViewBag.userID = HttpContext.User.Identity.GetUserId(); // used to map the user to their item for edit and delete purposes
+            var items = ReturnItems<ItemViewModels>();
+            return View(items);
         }
 
         public ActionResult MyItems()
         {
-            var userId = HttpContext.User.Identity.GetUserId();
-            var items =
-                db.Items.Include(i => i.Donation_Categories)
-                    .Include(i => i.Donation_Location)
-                    .Include(i => i.User)
-                    .Where(i => i.User.AspNetUser.Id == userId);
-            return View("Index",items.ToList());
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
+            var items = ReturnItems<ItemViewModels>(ViewBag.userID);
+            return View("Index",items);
         }
 
         // GET: Items/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

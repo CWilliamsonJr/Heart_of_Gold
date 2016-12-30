@@ -11,9 +11,10 @@ namespace Hearts_of_Gold.Models
     //public class Metadata
     //{
     //}
-
+    //[ScaffoldTable(true)]
     public class ItemMetadata
     {
+        [ScaffoldColumn(false)]
         public int ItemID { get; set; }
 
         [DisplayName("Category")]
@@ -35,9 +36,12 @@ namespace Hearts_of_Gold.Models
         public string BusinessName { get; set; }
     }
 
+    [ScaffoldTable(true)]
     public class UserMetadata
     {
         public int UserID { get; set; }
+
+        [ScaffoldColumn(false)]
         public string AspNetUsersId { get; set; }
 
         [DisplayName("First Name")]

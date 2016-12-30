@@ -272,6 +272,7 @@
     <Compile Include="Models\Item.cs">
       <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ItemViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelMetadata.cs" />
     <Compile Include="Models\Request.cs">

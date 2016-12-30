@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Hearts_of_Gold.Models.Item>
+﻿@model IEnumerable<Hearts_of_Gold.ViewModels.ItemViewModels>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Item1)
+            @Html.DisplayNameFor(model => model.Item)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
@@ -26,16 +26,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Donation_Location.BusinessName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.AspNetUsersId)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Item1)
+            @Html.DisplayFor(modelItem => item.Item)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Quantity)
@@ -50,12 +47,9 @@
             @Html.DisplayFor(modelItem => item.Donation_Location.BusinessName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.AspNetUsersId)
-        </td>
-        <td>
             @Html.ActionLink("Details", "Details", new { id = item.ItemID }) 
 
-            @if (item.User.AspNetUsersId == ViewBag.userID)
+            @if (item.AspNetUsersId == ViewBag.userID)
             {
                 <text>|</text>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })

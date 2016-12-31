@@ -80,7 +80,7 @@ namespace Hearts_of_Gold.Controllers
             if (ModelState.IsValid)
             {
                 var id = ReturnUserId();
-                if(id == 0) return RedirectToAction("Create","Users"); // if user doesn't exist take the to user creating page
+                if (id == 0) return RedirectToAction("Create", "Users"); // if user doesn't exist take the to user creating page
 
                 item.UserID = id; // adds user Id to item object
                 db.Items.Add(item);
@@ -125,11 +125,12 @@ namespace Hearts_of_Gold.Controllers
 
             if (userId != userCompareId || itemId != item.ItemID)
             {
-                return RedirectToAction("Details",new {id = item.ItemID});
+                return RedirectToAction("Details", new { id = item.ItemID });
             }
 
             if (ModelState.IsValid)
             {
+                item.UserID = userId; // assigns userid to the item.
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -16,6 +16,14 @@ namespace Hearts_of_Gold.Controllers
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
 
+        private int ReturnUserId() // Gets the user id from the users table and returns it.
+        {
+            var aspNetUserId = HttpContext.User.Identity.GetUserId();
+            return
+                db.Users
+                .Where(i => i.AspNetUsersId == aspNetUserId)
+                .Select(i => i.UserID).FirstOrDefault();
+        }
 
         // GET: Items
         public ActionResult Index()
@@ -71,15 +79,10 @@ namespace Hearts_of_Gold.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = HttpContext.User.Identity.GetUserId();
-                var query =
-                    db.Items
-                        .Where(i => i.User.AspNetUsersId == userId)
-                        .Select(i => i.UserID)
-                        .First();
+                var id = ReturnUserId();
+                if(id == 0) return RedirectToAction("Create","Users"); // if user doesn't exist take the to user creating page
 
-                item.UserID = query;
-
+                item.UserID = id; // adds user Id to item object
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,8 +117,17 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,CategoryID,LocationID,UserID,Item1,Quantity,Description")] Item item)
+        public ActionResult Edit([Bind(Include = "ItemID,CategoryID,LocationID,Item1,Quantity,Description")] Item item)
         {
+            var userId = ReturnUserId();
+            var userCompareId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.UserID).FirstOrDefault();
+            var itemId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.ItemID).FirstOrDefault();
+
+            if (userId != userCompareId || itemId != item.ItemID)
+            {
+                return RedirectToAction("Details",new {id = item.ItemID});
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(item).State = EntityState.Modified;

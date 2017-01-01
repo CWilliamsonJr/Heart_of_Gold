@@ -25,7 +25,7 @@ namespace Hearts_of_Gold.Models
         public string Item1 { get; set; }
 
 
-        [Range(1,int.MaxValue, ErrorMessage = "Must enter a value greater than 0")]
+        [Range(1, int.MaxValue, ErrorMessage = "Must enter a value greater than 0")]
         public int Quantity { get; set; }
         public string Description { get; set; }
     }
@@ -48,12 +48,12 @@ namespace Hearts_of_Gold.Models
         public string Categories { get; set; }
     }
 
-    [ScaffoldTable(true)]
+
     public class UserMetadata
     {
         public int UserID { get; set; }
 
-        
+
         public string AspNetUsersId { get; set; }
 
         [DisplayName("First Name")]
@@ -71,7 +71,7 @@ namespace Hearts_of_Gold.Models
         [DisplayName("Date of Birth")]
         [Required(ErrorMessage = "You must enter a Date of Birth")]
         public System.DateTime Date_of_Birth { get; set; }
-        
+
         [DisplayName(" ")]
         [HiddenInput(DisplayValue = false)]
         public Nullable<bool> IsDeleted { get; set; }

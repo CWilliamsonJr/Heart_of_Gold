@@ -91,6 +91,7 @@ namespace Hearts_of_Gold.Controllers
             ViewBag.RequesterID = new SelectList(db.Users, "UserID", "AspNetUsersId", request.RequesterID);
             return View(request);
         }
+
         public ActionResult MakeRequest(int? id)
         {
             if (id == null)
@@ -102,10 +103,32 @@ namespace Hearts_of_Gold.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories", item.CategoryID);
-           // ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", item.LocationID);
-            //ViewBag.UserID = new SelectList(db.Users, "UserID", "AspNetUsersId", item.UserID);
             return View(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // [Bind(Include = "Quantity,ItemID,")]
+        public ActionResult MakeRequest([Bind(Include = "ItemID,Quantity")] Item item)
+        {
+            var userId = ReturnUserId();
+            var dbItem = db.Items.Find(item.ItemID); // gets the requested item from the database.
+
+            if (dbItem != null && userId != 0 && userId != dbItem.UserID) // checks to see if the item exist, the user is valid, and not trying to request their own item.
+            {
+                var request = new Request()
+                {
+                    Quantity = item.Quantity, 
+                    RequesterID = userId,
+                    DonationItemID = dbItem.ItemID,
+                    LocationID = dbItem.LocationID
+                };
+                
+                db.Requests.Add(request);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Details", "Items", new { id = item.ItemID });
         }
 
         // POST: Requests/Edit/5

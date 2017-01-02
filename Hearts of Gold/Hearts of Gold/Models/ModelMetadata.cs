@@ -30,6 +30,25 @@ namespace Hearts_of_Gold.Models
         public string Description { get; set; }
     }
 
+    public class RequestMetadata
+    {
+        [DisplayName("Donated Item")]
+        public int DonationItemID { get; set; }
+
+        [DisplayName("Item's Location")]
+        public int LocationID { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public int RequesterID { get; set; }
+
+        [DisplayName("Item Quanity")]
+        [Range(1, int.MaxValue, ErrorMessage = "Must enter a value greater than 0")]
+        public int Quantity { get; set; }
+
+        [DisplayName("Received Item")]
+        public bool ItemPickedUp { get; set; }
+    }
+
     public class LocationMetadata
     {
         [DisplayName("Business Name")]
@@ -74,6 +93,6 @@ namespace Hearts_of_Gold.Models
 
         [DisplayName(" ")]
         [HiddenInput(DisplayValue = false)]
-        public Nullable<bool> IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -75,23 +75,7 @@ namespace Hearts_of_Gold.Controllers
             return View(request);
         }
 
-        // GET: Requests/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Request request = db.Requests.Find(id);
-            if (request == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", request.LocationID);
-            ViewBag.DonationItemID = new SelectList(db.Items, "ItemID", "Item1", request.DonationItemID);
-            ViewBag.RequesterID = new SelectList(db.Users, "UserID", "AspNetUsersId", request.RequesterID);
-            return View(request);
-        }
+       
 
         public ActionResult MakeRequest(int? id)
         {
@@ -117,8 +101,7 @@ namespace Hearts_of_Gold.Controllers
 
             if (dbItem != null && userId != 0 && userId != dbItem.UserID) // checks to see if the item exist, the user is valid, and not trying to request their own item.
             {
-                
-                if (item.Quantity > dbItem.Quantity || item.Quantity <= 0) item.Quantity = 1;
+                if (item.Quantity > dbItem.Quantity) item.Quantity = 1; // checks to see if quantity is more than what's available 
 
                 var requestExist = db.Requests.Where(r => r.DonationItemID == item.ItemID && r.RequesterID == userId)
                     .Select(r => r).FirstOrDefault();
@@ -142,6 +125,24 @@ namespace Hearts_of_Gold.Controllers
             return RedirectToAction("Details", "Items", new { id = item.ItemID });
         }
 
+        // GET: Requests/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Request request = db.Requests.Find(id);
+            if (request == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", request.LocationID);
+            ViewBag.DonationItemID = new SelectList(db.Items, "ItemID", "Item1", request.DonationItemID);
+            ViewBag.RequesterID = new SelectList(db.Users, "UserID", "AspNetUsersId", request.RequesterID);
+            return View(request);
+        }
+
         // POST: Requests/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -149,15 +150,23 @@ namespace Hearts_of_Gold.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "RequestID,DonationItemID,LocationID,RequesterID,Quantity,ItemPickedUp")] Request request)
         {
-            if (ModelState.IsValid)
+            var updatedRequest = db.Requests.Find(request.RequestID);
+            var item = db.Items.Find(updatedRequest.DonationItemID);
+            var userId = ReturnUserId();
+
+            if (ModelState.IsValid && userId == updatedRequest.RequesterID)
             {
-                db.Entry(request).State = EntityState.Modified;
+                if (request.Quantity > item.Quantity) request.Quantity = 1; // checks to see if quantity is more than what's available 
+                updatedRequest.Quantity = request.Quantity;
+                updatedRequest.ItemPickedUp = request.ItemPickedUp;
+
+                db.Entry(updatedRequest).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", request.LocationID);
-            ViewBag.DonationItemID = new SelectList(db.Items, "ItemID", "Item1", request.DonationItemID);
-            ViewBag.RequesterID = new SelectList(db.Users, "UserID", "AspNetUsersId", request.RequesterID);
+            //ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName", request.LocationID);
+            //ViewBag.DonationItemID = new SelectList(db.Items, "ItemID", "Item1", request.DonationItemID);
+            //ViewBag.RequesterID = new SelectList(db.Users, "UserID", "AspNetUsersId", request.RequesterID);
             return View(request);
         }
 

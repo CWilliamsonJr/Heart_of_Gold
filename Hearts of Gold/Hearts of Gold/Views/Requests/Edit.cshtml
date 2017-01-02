@@ -18,29 +18,20 @@
         @Html.HiddenFor(model => model.RequestID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DonationItemID, "DonationItemID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DonationItemID, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownList("DonationItemID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.Item.Item1, null , new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.DonationItemID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LocationID, "LocationID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LocationID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.Item.Donation_Location.BusinessName, null, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RequesterID, "RequesterID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("RequesterID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.RequesterID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

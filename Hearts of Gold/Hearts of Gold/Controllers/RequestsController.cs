@@ -26,6 +26,7 @@ namespace Hearts_of_Gold.Controllers
         // GET: Requests
         public ActionResult Index()
         {
+            ViewBag.userID = ReturnUserId();
             var requests = db.Requests.Include(r => r.Donation_Location).Include(r => r.Item).Include(r => r.User);
             return View(requests.ToList());
         }
@@ -116,17 +117,27 @@ namespace Hearts_of_Gold.Controllers
 
             if (dbItem != null && userId != 0 && userId != dbItem.UserID) // checks to see if the item exist, the user is valid, and not trying to request their own item.
             {
-                var request = new Request()
-                {
-                    Quantity = item.Quantity, 
-                    RequesterID = userId,
-                    DonationItemID = dbItem.ItemID,
-                    LocationID = dbItem.LocationID
-                };
                 
-                db.Requests.Add(request);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (item.Quantity > dbItem.Quantity || item.Quantity <= 0) item.Quantity = 1;
+
+                var requestExist = db.Requests.Where(r => r.DonationItemID == item.ItemID && r.RequesterID == userId)
+                    .Select(r => r).FirstOrDefault();
+
+                if (requestExist == null) // checks to make sure the request doesn't already exist.
+                {
+                    var request = new Request()
+                    {
+                        Quantity = item.Quantity,
+                        RequesterID = userId,
+                        DonationItemID = dbItem.ItemID,
+                        LocationID = dbItem.LocationID
+                    };
+
+                    db.Requests.Add(request);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
             return RedirectToAction("Details", "Items", new { id = item.ItemID });
         }

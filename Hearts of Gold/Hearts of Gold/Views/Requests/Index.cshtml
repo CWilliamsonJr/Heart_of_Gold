@@ -23,34 +23,31 @@
         <th>
             @Html.DisplayNameFor(model => model.Item.Item1)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.AspNetUsersId)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemPickedUp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Donation_Location.BusinessName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Item.Item1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.AspNetUsersId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RequestID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RequestID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RequestID })
-        </td>
+        @if (ViewBag.userID == item.User.UserID)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Donation_Location.BusinessName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.Item1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemPickedUp)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RequestID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RequestID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RequestID })
+            </td>
+        }
     </tr>
 }
 

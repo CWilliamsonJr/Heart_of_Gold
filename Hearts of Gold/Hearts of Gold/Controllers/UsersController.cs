@@ -18,7 +18,7 @@ namespace Hearts_of_Gold.Controllers
         private int ReturnUserId() // Gets the user id from the users table and returns it.
         {
             var aspNetUserId = HttpContext.User.Identity.GetUserId();
-            return 
+            return
                 db.Users
                 .Where(i => i.AspNetUsersId == aspNetUserId)
                 .Select(i => i.UserID).FirstOrDefault();
@@ -27,8 +27,8 @@ namespace Hearts_of_Gold.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.AspNetUser);
-            return View(users.ToList());
+            //var users = db.Users.Include(u => u.AspNetUser);
+            return RedirectToAction("Details");
         }
 
         // GET: Users/Details/5
@@ -65,7 +65,6 @@ namespace Hearts_of_Gold.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.AspNetUsersId = HttpContext.User.Identity.GetUserId();
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,15 +96,20 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
+        public ActionResult Edit([Bind(Include = "UserID,Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
         {
-            if (ModelState.IsValid)
+            var aspNetUsersId = HttpContext.User.Identity.GetUserId();
+            var updatedUserId =
+                db.Users.Where(u => u.AspNetUsersId == aspNetUsersId).Select(u => u.UserID).FirstOrDefault();
+
+            if (ModelState.IsValid && updatedUserId == user.UserID)
             {
+                user.AspNetUsersId = aspNetUsersId;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);
+            //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);
             return View(user);
         }
 

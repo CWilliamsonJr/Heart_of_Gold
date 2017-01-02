@@ -91,8 +91,7 @@ namespace Hearts_of_Gold.Models
         [Required(ErrorMessage = "You must enter a Date of Birth")]
         public System.DateTime Date_of_Birth { get; set; }
 
-        [DisplayName(" ")]
-        [HiddenInput(DisplayValue = false)]
+        [DisplayName("Delete Account")]
         public bool IsDeleted { get; set; }
     }
 }

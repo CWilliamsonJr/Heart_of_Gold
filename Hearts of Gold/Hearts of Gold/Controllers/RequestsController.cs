@@ -104,7 +104,7 @@ namespace Hearts_of_Gold.Controllers
                 if (item.Quantity > dbItem.Quantity) item.Quantity = 1; // checks to see if quantity is more than what's available 
 
                 var requestExist = db.Requests.Where(r => r.DonationItemID == item.ItemID && r.RequesterID == userId)
-                    .Select(r => r).FirstOrDefault();
+                    .Select(r => r).FirstOrDefault(); // checks to see if a request for the item already exists.
 
                 if (requestExist == null) // checks to make sure the request doesn't already exist.
                 {
@@ -133,6 +133,9 @@ namespace Hearts_of_Gold.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Request request = db.Requests.Find(id);
+            var userId = ReturnUserId();
+            if (userId != request.RequesterID) RedirectToAction("Index");
+
             if (request == null)
             {
                 return HttpNotFound();

@@ -7,14 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace Hearts_of_Gold.Models
 {
     using System;
     using System.Collections.Generic;
-
-    [MetadataType(typeof(UserMetadata))]
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,7 +27,7 @@ namespace Hearts_of_Gold.Models
         public string Lastname { get; set; }
         public string Streetaddress { get; set; }
         public System.DateTime Date_of_Birth { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

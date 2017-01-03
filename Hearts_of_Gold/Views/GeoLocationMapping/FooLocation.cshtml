@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<Hearts_of_Gold.Models.FooWithLocationViewModel>
+
+@foreach (Hearts_of_Gold.Models.FooWithLocationViewModel foo in Model)
+{
+    <div class="foo" data-latitude="@(foo.Latitude)"
+         data-longitude="@(foo.Longitude)">
+        <span>@foo.Latitude</span>
+        <span>@foo.Longitude</span>
+        
+    </div>
+
+
+}
+

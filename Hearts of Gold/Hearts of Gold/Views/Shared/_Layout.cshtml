@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
+        <p class="lead" align="center"><img src="~/Content/hog.gif" width="50"></p>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,10 +22,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                    <li>@Html.ActionLink("Items Available", "Index", "Items")</li>
+
+                    <li>@Html.ActionLink("Donation Locations", "Index", "Donation_Location")</li>
+                    <li>@Html.ActionLink("Create Items", "Create", "Items")</li>
+
+                    <li>@Html.ActionLink("Create Donation_Location", "Create", "Donation_Location")</li>
+
+                   
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

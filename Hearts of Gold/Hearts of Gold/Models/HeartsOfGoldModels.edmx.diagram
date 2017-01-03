@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce5bbe6f261e4b9c85c4adc432bd4080" Name="Diagram1">
+      <Diagram DiagramId="aa73efbdef5347b28588e4d60b07dd0d" Name="Diagram1">
         <EntityTypeShape EntityType="Hearts_Of_GoldModel.AspNetUser" Width="1.5" PointX="1.5" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Hearts_Of_GoldModel.Donation_Categories" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Hearts_Of_GoldModel.Donation_Location" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Hearts_Of_GoldModel.Item" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Request" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hearts_Of_GoldModel.Request" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Hearts_Of_GoldModel.User" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
         <AssociationConnector Association="Hearts_Of_GoldModel.fk_Users_LoginID" ManuallyRouted="false" />
         <AssociationConnector Association="Hearts_Of_GoldModel.fk_CategoryID_Donation_Categories_ID" ManuallyRouted="false" />

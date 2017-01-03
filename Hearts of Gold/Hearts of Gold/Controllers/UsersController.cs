@@ -53,7 +53,7 @@ namespace Hearts_of_Gold.Controllers
         {
             var userId = HttpContext.User.Identity.GetUserId();
             var userExists = // checks to see if user is already registed in the users table.
-                db.Users.Where(u => u.AspNetUsersId == userId)
+                db.Users.Where(u => u.AspNetUsersId == userId )
                     .Select(u => u.UserID)
                     .FirstOrDefault();
             if (userExists != 0)
@@ -74,9 +74,10 @@ namespace Hearts_of_Gold.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.AspNetUsersId = HttpContext.User.Identity.GetUserId();
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);

@@ -35,7 +35,7 @@ namespace Hearts_of_Gold.Controllers
             //var requests = db.Requests.Where(r => r.RequesterID == userId).Select(r => new 
             //{
             //    ItemId = r.DonationItemID,
-            //    RequestId = r.RequestID
+            //    RequestId = r.RequestId
             //}).ToList();
 
             //ViewBag.requestedItems = requests;

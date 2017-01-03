@@ -204,24 +204,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\HeartsOfGoldModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HeartsOfGoldModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\HeartsOfGoldModels.edmx.diagram">
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Models\HeartsOfGoldModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
-      <LastGenOutput>HeartsOfGoldModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\HeartsOfGoldModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
-      <LastGenOutput>HeartsOfGoldModels.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -254,43 +237,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Donation_Categories.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Donation_Location.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HeartsOfGoldModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HeartsOfGoldModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HeartsOfGoldModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HeartsOfGoldModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HeartsOfGoldModels.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AspNetUser.cs" />
+    <Compile Include="Models\Donation_Categories.cs" />
+    <Compile Include="Models\Donation_Location.cs" />
+    <Compile Include="Models\Hearts_Of_GoldEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Item.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\ItemViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelMetadata.cs" />
-    <Compile Include="Models\Request.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>HeartsOfGoldModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

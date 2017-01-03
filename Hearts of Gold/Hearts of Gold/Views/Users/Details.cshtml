@@ -43,24 +43,29 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.AspNetUser.Email)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.IsDeleted)*@
+            @if (Model.IsDeleted)
+            {
+                <b>No</b>
+            }
+            else
+            {
+                <p>Yes</p>
+            }
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit") 
+    @*@Html.ActionLink("Back to Details", "Index")*@
 </p>

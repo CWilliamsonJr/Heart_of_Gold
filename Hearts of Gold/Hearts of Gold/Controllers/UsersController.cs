@@ -65,9 +65,10 @@ namespace Hearts_of_Gold.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.AspNetUsersId = HttpContext.User.Identity.GetUserId();
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);

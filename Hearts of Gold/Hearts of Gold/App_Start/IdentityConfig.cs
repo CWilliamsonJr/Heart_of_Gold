@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,17 +14,56 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Hearts_of_Gold.Models;
+using System.Net.Http;
+using System.Net.Mail;
+
+
 
 namespace Hearts_of_Gold
 {
-    public class EmailService : IIdentityMessageService
+    public class GmailEmailService : SmtpClient
     {
-        public Task SendAsync(IdentityMessage message)
+        // Gmail user-name
+        public string UserName { get; set; }
+
+        public GmailEmailService() :
+            base(ConfigurationManager.AppSettings["GmailHost"], Int32.Parse(ConfigurationManager.AppSettings["GmailPort"]))
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            //Get values from web.config file:
+            this.UserName = ConfigurationManager.AppSettings["GmailUserName"];
+            this.EnableSsl = Boolean.Parse(ConfigurationManager.AppSettings["GmailSsl"]);
+            this.UseDefaultCredentials = false;
+            this.Credentials = new System.Net.NetworkCredential(this.UserName, ConfigurationManager.AppSettings["GmailPassword"]);
         }
+
+
     }
+    public partial class EmailService : IIdentityMessageService
+    {
+        public async Task SendAsync(IdentityMessage message)
+        {
+            MailMessage email = new MailMessage(new MailAddress("HeartsOfGold@gmail.com", "(do not reply)"),
+                new MailAddress(message.Destination))
+            {
+                Subject = message.Subject,
+                Body = message.Body,
+                IsBodyHtml = true
+            };
+
+                        
+
+            using (var mailClient = new GmailEmailService())
+            {
+                //In order to use the original from email address, uncomment this line:
+                email.From = new MailAddress(mailClient.UserName, "(do not reply)");
+
+                await mailClient.SendMailAsync(email);
+            }
+        }
+
+       
+
+}
 
     public class SmsService : IIdentityMessageService
     {

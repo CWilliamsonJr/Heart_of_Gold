@@ -6,13 +6,10 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations
 namespace Hearts_of_Gold.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
-   
+
+
     public partial class Request
     {
         public int RequestID { get; set; }

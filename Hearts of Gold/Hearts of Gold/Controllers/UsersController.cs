@@ -51,6 +51,15 @@ namespace Hearts_of_Gold.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            var userId = HttpContext.User.Identity.GetUserId();
+            var userExists = // checks to see if user is already registed in the users table.
+                db.Users.Where(u => u.AspNetUsersId == userId )
+                    .Select(u => u.UserID)
+                    .FirstOrDefault();
+            if (userExists != 0)
+            {
+                return RedirectToAction("Index", "Items");
+            }
             //var userName = HttpContext.User.Identity.Name;
             //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();

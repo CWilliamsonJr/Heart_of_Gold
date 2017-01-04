@@ -44,16 +44,18 @@ namespace Hearts_of_Gold.Controllers
 
         public ActionResult MyItems()
         {
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
             var userId = HttpContext.User.Identity.GetUserId();
             var items =
                 db.Items.Include(i => i.Donation_Categories)
                     .Include(i => i.Donation_Location)
                     .Include(i => i.User)
                     .Where(i => i.User.AspNetUser.Id == userId);
-            return View("Index", items.ToList());
+            return View(items.ToList());
         }
 
         // GET: Items/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             ViewBag.userID = HttpContext.User.Identity.GetUserId();

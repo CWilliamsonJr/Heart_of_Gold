@@ -228,6 +228,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Donation_LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -301,6 +302,11 @@
     <Content Include="Views\Requests\Index.cshtml" />
     <Content Include="Views\Requests\MakeRequest.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Donation_Location\NotUsedCreate.cshtml" />
+    <Content Include="Views\Donation_Location\NotUsedDelete.cshtml" />
+    <Content Include="Views\Donation_Location\Details.cshtml" />
+    <Content Include="Views\Donation_Location\NotUsedEdit.cshtml" />
+    <Content Include="Views\Donation_Location\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

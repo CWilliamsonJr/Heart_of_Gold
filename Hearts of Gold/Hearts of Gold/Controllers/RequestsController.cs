@@ -122,7 +122,9 @@ namespace Hearts_of_Gold.Controllers
                 }
                 
             }
-            return RedirectToAction("Details", "Items", new { id = item.ItemID });
+            ViewData["error"] = "Your request already exists or you're trying to request your own item";
+            //return RedirectToAction("Details", "Items", new { id = item.ItemID });
+            return View("Error");
         }
 
         // GET: Requests/Edit/5

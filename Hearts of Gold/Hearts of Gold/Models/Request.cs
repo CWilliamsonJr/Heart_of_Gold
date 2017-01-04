@@ -6,6 +6,7 @@ namespace Hearts_of_Gold.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [MetadataType(typeof(RequestMetadata))]
     public partial class Request
     {
         public int RequestID { get; set; }

@@ -6,6 +6,7 @@ namespace Hearts_of_Gold.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [MetadataType(typeof(CategoryMetadata))]
     public partial class Donation_Categories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

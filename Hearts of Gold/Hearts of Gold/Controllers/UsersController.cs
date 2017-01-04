@@ -58,7 +58,8 @@ namespace Hearts_of_Gold.Controllers
                     .FirstOrDefault();
             if (userExists != 0)
             {
-                return RedirectToAction("Index", "Items");
+                ViewData["error"] = "Your account is already created";
+                return View("Error");
             }
             //var userName = HttpContext.User.Identity.Name;
             //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");

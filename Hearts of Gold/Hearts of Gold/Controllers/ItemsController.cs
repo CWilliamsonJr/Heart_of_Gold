@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hearts_of_Gold.Models;
+using Hearts_of_Gold.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
@@ -14,12 +15,30 @@ namespace Hearts_of_Gold.Controllers
     public class ItemsController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
-        
+
+        private int ReturnUserId() // Gets the user id from the users table and returns it.
+        {
+            var aspNetUserId = HttpContext.User.Identity.GetUserId();
+            return
+                db.Users
+                .Where(i => i.AspNetUsersId == aspNetUserId)
+                .Select(i => i.UserID).FirstOrDefault();
+        }
 
         // GET: Items
         public ActionResult Index()
         {
+            var userId = ReturnUserId();
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
+
             var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User);
+            //var requests = db.Requests.Where(r => r.RequesterID == userId).Select(r => new 
+            //{
+            //    ItemId = r.DonationItemID,
+            //    RequestId = r.RequestId
+            //}).ToList();
+
+            //ViewBag.requestedItems = requests;
             return View(items.ToList());
         }
 
@@ -31,12 +50,14 @@ namespace Hearts_of_Gold.Controllers
                     .Include(i => i.Donation_Location)
                     .Include(i => i.User)
                     .Where(i => i.User.AspNetUser.Id == userId);
-            return View("Index",items.ToList());
+            return View("Index", items.ToList());
         }
 
         // GET: Items/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -63,10 +84,14 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,CategoryID,LocationID,UserID,Item1,Quantity,Description")] Item item)
+        public ActionResult Create([Bind(Include = "CategoryID,LocationID,Item1,Quantity,Description")] Item item)
         {
             if (ModelState.IsValid)
             {
+                var id = ReturnUserId();
+                if (id == 0) return RedirectToAction("Create", "Users"); // if user doesn't exist take the to user creating page
+
+                item.UserID = id; // adds user Id to item object
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -101,10 +126,21 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,CategoryID,LocationID,UserID,Item1,Quantity,Description")] Item item)
+        public ActionResult Edit([Bind(Include = "ItemID,CategoryID,LocationID,Item1,Quantity,Description")] Item item)
         {
+            var userId = ReturnUserId();
+            var userCompareId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.UserID).FirstOrDefault();
+            var itemId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.ItemID).FirstOrDefault();
+
+            if (userId != userCompareId || itemId != item.ItemID)
+            {
+                ViewData["error"] = "You can only edit your own item";
+                return View("Error");
+            }
+
             if (ModelState.IsValid)
             {
+                item.UserID = userId; // assigns userid to the item.
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -118,6 +154,7 @@ namespace Hearts_of_Gold.Controllers
         // GET: Items/Delete/5
         public ActionResult Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -136,6 +173,15 @@ namespace Hearts_of_Gold.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Item item = db.Items.Find(id);
+            var userId = ReturnUserId();
+            var userCompareId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.UserID).FirstOrDefault();
+            var itemId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.ItemID).FirstOrDefault();
+
+            if (userId != userCompareId || itemId != item.ItemID)
+            {
+                ViewData["error"] = "You can only delete your own item";
+                return View("Error");
+            }
             db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");

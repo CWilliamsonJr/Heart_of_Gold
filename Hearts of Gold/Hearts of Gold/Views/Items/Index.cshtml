@@ -26,38 +26,45 @@
         <th>
             @Html.DisplayNameFor(model => model.Donation_Location.BusinessName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.AspNetUsersId)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Item1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Donation_Categories.Categories)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Donation_Location.BusinessName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.AspNetUsersId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Donation_Categories.Categories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Donation_Location.BusinessName)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID })
+                @if (item.User.AspNetUsersId == ViewBag.userID)
+                {
+                    <text>|</text>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.ItemID})
+                    <text>|</text>
+                    @Html.ActionLink("Delete", "Delete", new {id = item.ItemID})
+
+                }
+                else
+                {
+                    <text>|</text>
+                    @Html.ActionLink("Request Item", "MakeRequest", "Requests", new { id = item.ItemID }, new { title = "Make a Request to Pick up the Item" })
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>

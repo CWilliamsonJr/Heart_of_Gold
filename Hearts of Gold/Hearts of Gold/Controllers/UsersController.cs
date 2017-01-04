@@ -15,33 +15,54 @@ namespace Hearts_of_Gold.Controllers
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
 
+        private int ReturnUserId() // Gets the user id from the users table and returns it.
+        {
+            var aspNetUserId = HttpContext.User.Identity.GetUserId();
+            return
+                db.Users
+                .Where(i => i.AspNetUsersId == aspNetUserId)
+                .Select(i => i.UserID).FirstOrDefault();
+        }
+
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.AspNetUser);
-            return View(users.ToList());
+            //var users = db.Users.Include(u => u.AspNetUser);
+            return RedirectToAction("Details");
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            var id = ReturnUserId();
+
+            //if (id == 0)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Create");
             }
             return View(user);
         }
-        
+
         // GET: Users/Create
         public ActionResult Create()
         {
+            var userId = HttpContext.User.Identity.GetUserId();
+            var userExists = // checks to see if user is already registed in the users table.
+                db.Users.Where(u => u.AspNetUsersId == userId )
+                    .Select(u => u.UserID)
+                    .FirstOrDefault();
+            if (userExists != 0)
+            {
+                ViewData["error"] = "Your account is already created";
+                return View("Error");
+            }
             //var userName = HttpContext.User.Identity.Name;
-            ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
+            //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -50,13 +71,14 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,AspNetUsersId,Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
+        public ActionResult Create([Bind(Include = "Firstname,Lastname,Streetaddress,Date_of_Birth")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.AspNetUsersId = HttpContext.User.Identity.GetUserId();
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);
@@ -64,11 +86,12 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            var id = ReturnUserId();
+            if (id == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             User user = db.Users.Find(id);
             if (user == null)
@@ -84,24 +107,30 @@ namespace Hearts_of_Gold.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,AspNetUsersId,Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
+        public ActionResult Edit([Bind(Include = "UserID,Firstname,Lastname,Streetaddress,Date_of_Birth,IsDeleted")] User user)
         {
-            if (ModelState.IsValid)
+            var aspNetUsersId = HttpContext.User.Identity.GetUserId();
+            var updatedUserId =
+                db.Users.Where(u => u.AspNetUsersId == aspNetUsersId).Select(u => u.UserID).FirstOrDefault();
+
+            if (ModelState.IsValid && updatedUserId == user.UserID)
             {
+                user.AspNetUsersId = aspNetUsersId;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);
+            //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", user.AspNetUsersId);
             return View(user);
         }
 
         // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete()
         {
-            if (id == null)
+            var id = ReturnUserId();
+            if (id == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
             User user = db.Users.Find(id);
             if (user == null)
@@ -114,8 +143,9 @@ namespace Hearts_of_Gold.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed()
         {
+            var id = ReturnUserId();
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();

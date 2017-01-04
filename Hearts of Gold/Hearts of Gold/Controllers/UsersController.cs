@@ -11,7 +11,6 @@ using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
-    [Authorize]
     public class UsersController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
@@ -59,8 +58,7 @@ namespace Hearts_of_Gold.Controllers
                     .FirstOrDefault();
             if (userExists != 0)
             {
-                ViewData["error"] = "Your account is already created";
-                return View("Error");
+                return RedirectToAction("Index", "Items");
             }
             //var userName = HttpContext.User.Identity.Name;
             //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");

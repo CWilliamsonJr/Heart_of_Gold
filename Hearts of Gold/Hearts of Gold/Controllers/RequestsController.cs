@@ -11,7 +11,6 @@ using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
-    [Authorize]
     public class RequestsController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
@@ -123,9 +122,7 @@ namespace Hearts_of_Gold.Controllers
                 }
                 
             }
-            ViewData["error"] = "Your request already exists or you're trying to request your own item";
-            //return RedirectToAction("Details", "Items", new { id = item.ItemID });
-            return View("Error");
+            return RedirectToAction("Details", "Items", new { id = item.ItemID });
         }
 
         // GET: Requests/Edit/5

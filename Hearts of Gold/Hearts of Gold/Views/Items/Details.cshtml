@@ -1,0 +1,51 @@
+﻿@model Hearts_of_Gold.Models.Item
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Item1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Donation_Categories.Categories)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Donation_Categories.Categories)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Donation_Location.BusinessName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Donation_Location.BusinessName)
+        </dd>
+    </dl>
+</div>
+<p>
+    @if (Model.User.AspNetUsersId == ViewBag.userID)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) 
+        <text>|</text>
+
+    }
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -53,7 +53,7 @@ namespace Hearts_of_Gold.Controllers
         }
 
         //
-        // GET: /Account/Login
+        // GET: /Account/login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {

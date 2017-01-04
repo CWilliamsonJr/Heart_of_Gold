@@ -56,6 +56,7 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Items/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             ViewBag.userID = HttpContext.User.Identity.GetUserId();

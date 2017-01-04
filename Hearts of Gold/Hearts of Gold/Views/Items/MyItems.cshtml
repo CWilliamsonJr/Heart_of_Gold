@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<Hearts_of_Gold.Models.Item>
-
 @{
-    ViewBag.Title = "Item page";
+    ViewBag.Title = "My Item page";
 }
-
-<h2>List of Items for Donation</h2>
+<h2>List of My Items for Donation</h2>
 <p>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location")</p>
 <p>
     @Html.ActionLink("Click to list an item for donation", "Create")
 </p>
-<p>@Html.ActionLink("Click to list a list of your items", "MyItems")</p>
+<p>@Html.ActionLink("Click to go back to items list", "Index")</p>
 <table class="table">
     <tr>
         <th>
@@ -29,7 +27,6 @@
         </th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -53,9 +50,9 @@
                 @if (item.User.AspNetUsersId == ViewBag.userID)
                 {
                     <text>|</text>
-                    @Html.ActionLink("Edit", "Edit", new {id = item.ItemID})
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
                     <text>|</text>
-                    @Html.ActionLink("Delete", "Delete", new {id = item.ItemID})
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
 
                 }
                 else
@@ -63,9 +60,7 @@
                     <text>|</text>
                     @Html.ActionLink("Request Item", "MakeRequest", "Requests", new { id = item.ItemID }, new { title = "Make a Request to Pick up the Item" })
                 }
-
             </td>
         </tr>
     }
-
 </table>

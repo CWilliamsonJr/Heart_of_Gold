@@ -307,6 +307,7 @@
     <Content Include="Views\Donation_Location\Details.cshtml" />
     <Content Include="Views\Donation_Location\NotUsedEdit.cshtml" />
     <Content Include="Views\Donation_Location\Index.cshtml" />
+    <Content Include="Views\Items\MyItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
+    [Authorize]
     public class ItemsController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
@@ -26,6 +27,7 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Items
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var userId = ReturnUserId();

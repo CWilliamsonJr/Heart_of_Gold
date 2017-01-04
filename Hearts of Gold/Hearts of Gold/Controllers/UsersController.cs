@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();

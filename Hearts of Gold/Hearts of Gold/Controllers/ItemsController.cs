@@ -33,15 +33,11 @@ namespace Hearts_of_Gold.Controllers
             var userId = ReturnUserId();
             ViewBag.userID = HttpContext.User.Identity.GetUserId();
 
-            var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User);
-            //var requests = db.Requests.Where(r => r.RequesterID == userId).Select(r => new 
-            //{
-            //    ItemId = r.DonationItemID,
-            //    RequestId = r.RequestId
-            //}).ToList();
-
+            var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User).ToList();
+            var requests = db.Requests.Where(r => r.RequesterID == userId).ToList();
+            var tuple = new Tuple<List<Item>,List<Request>>(items,requests);
             //ViewBag.requestedItems = requests;
-            return View(items.ToList());
+            return View(tuple);
         }
 
         public ActionResult MyItems()

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Hearts_of_Gold.Models.Donation_Location>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Donation Locations";
 }
 
-<h2>Index</h2>
+<h2>Donation Locations</h2>
 
 <p>
-    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Back to View Items", "Index","Items",null, htmlAttributes: new { @class = "btn btn-default"})
 </p>
 <table class="table">
     <tr>

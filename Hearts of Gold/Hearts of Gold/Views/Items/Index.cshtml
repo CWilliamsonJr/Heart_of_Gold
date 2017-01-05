@@ -3,19 +3,26 @@
 @{
     ViewBag.Title = "Item page";
     var requests = Model.Item2;
-
+    var isAuthorized = Request.IsAuthenticated;
 }
 <h2>List of Items for Donation</h2>
-<p>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
-@if (Request.IsAuthenticated)
-{
-    <p>
+<div>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location", routeValues: null, htmlAttributes: new { @class = "btn btn-default", target="_blank" }) &nbsp;&nbsp;
+    @if (isAuthorized)
+    {
         @Html.ActionLink("Click to list an item for donation", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
-    </p>
-    <p>@Html.ActionLink("Click to see a list of your items", "MyItems", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
+    }
 
-    <p>@Html.ActionLink("Click view your requested Items", "Index", "Requests", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
+</div>
+<br/>
+@if (isAuthorized)
+{
+    <div>
+        @Html.ActionLink("Click to see a list of your items", "MyItems", routeValues: null, htmlAttributes: new {@class = "btn btn-default"}) &nbsp;&nbsp;
+
+        @Html.ActionLink("Click view your requested Items", "Index", "Requests", routeValues: null, htmlAttributes: new {@class = "btn btn-default"})
+    </div>
 }
+<br/>
 <table class="table">
     <tr>
         <th>
@@ -55,7 +62,7 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.ItemID })
-                @if (Request.IsAuthenticated)
+                @if (isAuthorized)
                 {
                     if (item.User.AspNetUsersId == ViewBag.userID) // checks to see if the item belongs to the user.
                      {
@@ -88,7 +95,7 @@
                 else
                 {
                     <text>|</text>
-                    @Html.ActionLink("Login to request an item", "Login", "Account");
+                    @Html.ActionLink("Login to request this item", "Login", "Account");
                 }
             </td>
         </tr>

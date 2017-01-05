@@ -3,11 +3,11 @@
     ViewBag.Title = "My Item page";
 }
 <h2>List of My Items for Donation</h2>
-<p>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location")</p>
+<p>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
 <p>
-    @Html.ActionLink("Click to list an item for donation", "Create")
+    @Html.ActionLink("Click to list an item for donation", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
-<p>@Html.ActionLink("Click to go back to items list", "Index")</p>
+<p>@Html.ActionLink("Click to go back to items list", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
 <table class="table">
     <tr>
         <th>

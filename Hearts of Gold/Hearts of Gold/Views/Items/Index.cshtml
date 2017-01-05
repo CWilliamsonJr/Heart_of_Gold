@@ -6,11 +6,12 @@
 
 }
 <h2>List of Items for Donation</h2>
-<p>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location")</p>
+<p>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
 <p>
-    @Html.ActionLink("Click to list an item for donation", "Create")
+    @Html.ActionLink("Click to list an item for donation", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
 </p>
-<p>@Html.ActionLink("Click to list a list of your items", "MyItems")</p>
+<p>@Html.ActionLink("Click to list a list of your items", "MyItems", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
+<p>@Html.ActionLink("Click view your requested Items", "Index","Requests", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
 <table class="table">
     <tr>
         <th>
@@ -67,7 +68,7 @@
                     {
                         if (item.ItemID == request.DonationItemID)
                         {
-                            @Html.ActionLink("Already Requested", "Edit", "Requests", new {id = request.RequestID}, new {title = "Edit your current request"})
+                            @Html.ActionLink("Already Requested", "Edit", "Requests", new { id = request.RequestID }, new { title = "Edit your current request" })
                             requestFound = true;
                         }
                     }

@@ -31,12 +31,11 @@ namespace Hearts_of_Gold.Controllers
         public ActionResult Index()
         {
             var userId = ReturnUserId();
-            ViewBag.userID = HttpContext.User.Identity.GetUserId();
 
             var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User).ToList();
             var requests = db.Requests.Where(r => r.RequesterID == userId).ToList();
-            var tuple = new Tuple<List<Item>,List<Request>>(items,requests);
-            //ViewBag.requestedItems = requests;
+            var tuple = new Tuple<List<Item>,List<Request>>(items,requests); // combines the item and request into one object.
+            
             return View(tuple);
         }
 

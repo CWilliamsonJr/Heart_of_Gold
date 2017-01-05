@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+.heart-img {
+    height: 200px;
+    width: 300px;
+    
+}
+.margin-top {
+    margin-top: 20px;
+}

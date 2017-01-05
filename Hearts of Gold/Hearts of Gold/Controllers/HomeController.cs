@@ -15,7 +15,7 @@ namespace Hearts_of_Gold.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Thank you for visiting HeartsofGold.com, the Caring and Sharing website.";
 
             return View();
         }

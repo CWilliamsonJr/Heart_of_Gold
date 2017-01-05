@@ -46,7 +46,7 @@ namespace Hearts_of_Gold.Controllers
             }
             return View(request);
         }
-
+        /*
         // GET: Requests/Create
         public ActionResult Create()
         {
@@ -75,7 +75,7 @@ namespace Hearts_of_Gold.Controllers
             ViewBag.RequesterID = new SelectList(db.Users, "UserID", "AspNetUsersId", request.RequesterID);
             return View(request);
         }
-
+       //*/
        
 
         public ActionResult MakeRequest(int? id)

@@ -12,7 +12,6 @@ using Microsoft.AspNet.Identity;
 
 namespace Hearts_of_Gold.Controllers
 {
-    [Authorize]
     public class ItemsController : Controller
     {
         private Hearts_Of_GoldEntities db = new Hearts_Of_GoldEntities();
@@ -27,7 +26,6 @@ namespace Hearts_of_Gold.Controllers
         }
 
         // GET: Items
-        [AllowAnonymous]
         public ActionResult Index()
         {
             var userId = ReturnUserId();
@@ -133,8 +131,7 @@ namespace Hearts_of_Gold.Controllers
 
             if (userId != userCompareId || itemId != item.ItemID)
             {
-                ViewData["error"] = "You can only edit your own item";
-                return View("Error");
+                return RedirectToAction("Details", new { id = item.ItemID });
             }
 
             if (ModelState.IsValid)
@@ -153,7 +150,6 @@ namespace Hearts_of_Gold.Controllers
         // GET: Items/Delete/5
         public ActionResult Delete(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -172,15 +168,6 @@ namespace Hearts_of_Gold.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Item item = db.Items.Find(id);
-            var userId = ReturnUserId();
-            var userCompareId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.UserID).FirstOrDefault();
-            var itemId = db.Items.Where(i => i.ItemID == item.ItemID).Select(i => i.ItemID).FirstOrDefault();
-
-            if (userId != userCompareId || itemId != item.ItemID)
-            {
-                ViewData["error"] = "You can only delete your own item";
-                return View("Error");
-            }
             db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");

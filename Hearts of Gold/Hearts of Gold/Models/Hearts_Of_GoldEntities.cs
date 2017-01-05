@@ -10,6 +10,7 @@ namespace Hearts_of_Gold.Models
         public Hearts_Of_GoldEntities()
             : base("name=HeartsOfGoldModels")
         {
+            
         }
 
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }

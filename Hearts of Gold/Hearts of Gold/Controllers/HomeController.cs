@@ -15,14 +15,14 @@ namespace Hearts_of_Gold.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Thank you for visiting HeartsofGold.com";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Our contact page.";
+            ViewBag.Message = "Your contact page.";
 
             return View();
         }

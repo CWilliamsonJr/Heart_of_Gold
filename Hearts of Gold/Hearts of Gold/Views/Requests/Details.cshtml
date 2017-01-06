@@ -19,14 +19,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ItemPickedUp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ItemPickedUp)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Donation_Location.BusinessName)
         </dt>
 
@@ -41,13 +33,18 @@
         <dd>
             @Html.DisplayFor(model => model.Item.Item1)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.User.AspNetUsersId)
+            @Html.DisplayNameFor(model => model.ItemPickedUp)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.User.AspNetUsersId)
+            @if (Model.ItemPickedUp)
+            {
+                <text>Yes</text>
+            }
+            else
+            {
+                <b>No</b>
+            }
         </dd>
 
     </dl>

@@ -61,6 +61,7 @@ namespace Hearts_of_Gold.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult SortBy([Optional] string LocationID ,[Optional] string CategoryID)
         {
             var userId = ReturnUserId();

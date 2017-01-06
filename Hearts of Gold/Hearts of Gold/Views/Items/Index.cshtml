@@ -6,23 +6,51 @@
     var isAuthorized = Request.IsAuthenticated;
 }
 <h2>List of Items for Donation</h2>
-<div>@Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location", routeValues: null, htmlAttributes: new { @class = "btn btn-default", target="_blank" }) &nbsp;&nbsp;
+<div class="col-sm-12">
+    <div class="col-sm-6">
+        <div>
+            @Html.ActionLink("Click to view a list of Donation Locations", "Index", "Donation_Location", routeValues: null, htmlAttributes: new { @class = "btn btn-default", target = "_blank" }) &nbsp;&nbsp;
+        @if (isAuthorized)
+        {
+            @Html.ActionLink("Click to list an item for donation", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+        }
+
+    </div>
+    <br />
     @if (isAuthorized)
     {
-        @Html.ActionLink("Click to list an item for donation", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+        <div>
+            @Html.ActionLink("Click to see a list of your items", "MyItems", routeValues: null, htmlAttributes: new { @class = "btn btn-default" }) &nbsp;&nbsp;
+
+            @Html.ActionLink("Click view your requested Items", "Index", "Requests", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+        </div>
     }
-
-</div>
-<br/>
-@if (isAuthorized)
-{
-    <div>
-        @Html.ActionLink("Click to see a list of your items", "MyItems", routeValues: null, htmlAttributes: new {@class = "btn btn-default"}) &nbsp;&nbsp;
-
-        @Html.ActionLink("Click view your requested Items", "Index", "Requests", routeValues: null, htmlAttributes: new {@class = "btn btn-default"})
+        <br />
     </div>
-}
-<br/>
+    <div class="col-sm-6">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group col-sm-12">
+                @Html.LabelFor(model => model.Item1[0].CategoryID, "Sort By Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Item1[0].CategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                @Html.LabelFor(model => model.Item1[0].LocationID,"Sort by Location" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                
+                <div class="col-md-8">
+                    @Html.DropDownList("LocationID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Item1[0].LocationID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
 <table class="table">
     <tr>
         <th>

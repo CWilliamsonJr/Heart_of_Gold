@@ -35,7 +35,9 @@ namespace Hearts_of_Gold.Controllers
             var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User).ToList();
             var requests = db.Requests.Where(r => r.RequesterID == userId).ToList();
             var tuple = new Tuple<List<Item>,List<Request>>(items,requests); // combines the item and request into one object.
+            ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories");
             
+            ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName");
             return View(tuple);
         }
 

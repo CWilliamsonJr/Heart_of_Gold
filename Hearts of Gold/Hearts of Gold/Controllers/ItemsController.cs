@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using Hearts_of_Gold.Models;
@@ -32,14 +33,80 @@ namespace Hearts_of_Gold.Controllers
         {
             var userId = ReturnUserId();
             ViewBag.userID = HttpContext.User.Identity.GetUserId();
+
             var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User).ToList();
             var requests = db.Requests.Where(r => r.RequesterID == userId).ToList();
+
             var tuple = new Tuple<List<Item>,List<Request>>(items,requests); // combines the item and request into one object.
-            ViewBag.CategoryID = new SelectList(db.Donation_Categories, "CategoryID", "Categories");
-            
-            ViewBag.LocationID = new SelectList(db.Donation_Location, "LocationID", "BusinessName");
+
+            var categories = db.Donation_Categories.ToList();
+            var locations = db.Donation_Location.ToList();
+
+            var emptyCat = new Donation_Categories()
+            {
+                Categories = " "
+            };
+
+            var emptyLoc = new Donation_Location()
+            {
+                BusinessName = " "
+            };
+
+            categories.Insert(0, emptyCat);
+            locations.Insert(0, emptyLoc);
+
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "Categories");
+            ViewBag.LocationID = new SelectList(locations, "LocationID", "BusinessName");
             return View(tuple);
         }
+
+        [HttpPost]
+        public ActionResult SortBy([Optional] string LocationID ,[Optional] string CategoryID)
+        {
+            var userId = ReturnUserId();
+            ViewBag.userID = HttpContext.User.Identity.GetUserId();
+
+            var requests = db.Requests.Where(r => r.RequesterID == userId).ToList();
+            var items = db.Items.Include(i => i.Donation_Categories).Include(i => i.Donation_Location).Include(i => i.User).Select(i => i);
+
+            if (CategoryID != 0.ToString())
+            {
+                int catInt;
+                int.TryParse(CategoryID, out catInt);
+                items = items.Where(i => i.Donation_Categories.CategoryID == catInt);
+            }
+
+            if (LocationID != 0.ToString())
+            {
+                int locInt;
+                int.TryParse(LocationID, out locInt);
+                items = items.Where(i => i.Donation_Location.LocationID == locInt);
+            }
+            var search = items.ToList();
+
+            var tuple = new Tuple<List<Item>, List<Request>>(search, requests); // combines the item and request into one object.
+
+            var emptyCat = new Donation_Categories()
+            {
+                Categories = " "
+            };
+
+            var emptyLoc = new Donation_Location()
+            {
+                BusinessName = " "
+            };
+
+            var categories = db.Donation_Categories.ToList();
+            var locations = db.Donation_Location.ToList();
+
+            categories.Insert(0, emptyCat);
+            locations.Insert(0, emptyLoc);
+
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "Categories");
+            ViewBag.LocationID = new SelectList(locations, "LocationID", "BusinessName");
+            return View("Index",tuple);
+        }
+
 
         public ActionResult MyItems()
         {
